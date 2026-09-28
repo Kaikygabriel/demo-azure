@@ -34,7 +34,7 @@ internal sealed class LoginUserHandler : IRequestHandler<LoginUserRequest,Result
         var refreshToken =new RefreshToken(_tokenService.GenerateRefreshToken(),DateTime.UtcNow.AddHours(JwtConfiguration.ExpiredRefreshTokenInHours));
         user.SetRefreshToken(refreshToken);
         
-        _userRepository.Create(user);
+        _userRepository.Update(user);
         await _unitOfWork.CommitAsync(cancellationToken);
 
         return new AuthUserResponse(

@@ -5,4 +5,8 @@ namespace Shopping.Application.Interfaces.Repositories;
 public interface IVoucherRepository
 {
     Task<Voucher?> GetByIdAsync(Guid id,CancellationToken cancellationToken = default);
+
+    void Create(Voucher voucher);
+    void Update(Voucher voucher);
+    void Delete(Voucher voucher);
 }

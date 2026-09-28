@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Shopping.Application.Configurations;
 using Shopping.Application.Interfaces.Services;
@@ -19,7 +20,7 @@ internal sealed class TokenService : ITokenService
 
     public string GenerateAccessToken(User user, CancellationToken cancellationToken = default)
     {
-        var key = new SymmetricSecurityKey(Convert.FromBase64String(_jwtConfiguration.Key));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.Key));
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var tokenDescriptor = new SecurityTokenDescriptor()
         {

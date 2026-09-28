@@ -3,8 +3,9 @@ using Shopping.Domain.BackOffice.Entities;
 
 namespace Shopping.Infra.Data.Context;
 
-public class AppDbContext : DbContext
+public class AppDbContext(DbContextOptions<AppDbContext>options) : DbContext(options)
 {
+    
     public DbSet<Voucher> Vouchers { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<User>Users { get; set; }

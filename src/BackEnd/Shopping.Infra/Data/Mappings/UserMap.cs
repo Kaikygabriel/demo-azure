@@ -15,6 +15,9 @@ internal sealed class UserMap : IEntityTypeConfiguration<User>
         builder.HasKey(x => x.Id)
             .HasName("pk_user_id");
 
+        builder.Property(x => x.Id)
+            .HasColumnName("id");
+
         builder.Property(x => x.Name)
             .HasColumnName("name")
             .HasColumnType("varchar")
@@ -45,8 +48,7 @@ internal sealed class UserMap : IEntityTypeConfiguration<User>
         {
             x.Property(x => x.Code)
                 .HasColumnName("refresh_token")
-                .HasColumnType("varchar")
-                .HasMaxLength(60)
+                .HasColumnType("text")
                 .IsRequired(false);
 
             x.Property(x => x.ExpiredAt)
