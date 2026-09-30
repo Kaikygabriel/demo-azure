@@ -28,6 +28,7 @@ public static class DependencyInjection
         
         #region Queries
 
+            builder.Services.AddTransient<IOrderQuery,OrderQuery>();
             builder.Services.AddTransient<IProductQuery,ProductQuery>();
 
         #endregion

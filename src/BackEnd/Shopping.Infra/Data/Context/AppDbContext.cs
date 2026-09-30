@@ -14,8 +14,10 @@ public class AppDbContext(DbContextOptions<AppDbContext>options) : DbContext(opt
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.EnableDetailedErrors();
-        optionsBuilder.LogTo(Console.WriteLine);
+        optionsBuilder
+            .EnableDetailedErrors()
+            .EnableSensitiveDataLogging()
+            .LogTo(Console.WriteLine);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

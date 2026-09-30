@@ -27,8 +27,11 @@ internal sealed class ProductQuery : IProductQuery
 
     public async Task<ProductDetailsDto?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _appDbContext.Products.Select(x=> 
+        return await _appDbContext.Products
+            .Where(x=>x.Id == id)
+            .Select(x=> 
                 new ProductDetailsDto(x.Id,x.Category,x.Title,x.Summary,x.ImageThumbUrl,x.ImagesUrl,x.Price,x.Discount,x.Stock))
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(cancellationToken);
+        
     }
 }

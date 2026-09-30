@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shopping.Domain.BackOffice.Entities;
 
+
+
 namespace Shopping.Infra.Data.Mappings;
 
 internal sealed class ProductMap : IEntityTypeConfiguration<Product>
@@ -17,6 +19,17 @@ internal sealed class ProductMap : IEntityTypeConfiguration<Product>
         builder.Property(x=>x.Id)
             .HasColumnName("id")
             .HasColumnType("uuid");
+
+        builder.HasOne(x => x.Category)
+            .WithMany(x=>x.Products)
+            .HasForeignKey(x => x.CategoryId)
+            .HasConstraintName("fk_category_id")
+            .IsRequired();
+        
+        builder.Property(x => x.CategoryId)
+            .HasColumnName("category_id")
+            .HasColumnType("uuid")
+            .IsRequired();
         
         builder.Property(x => x.Title)
             .HasColumnName("title")
@@ -62,7 +75,7 @@ internal sealed class ProductMap : IEntityTypeConfiguration<Product>
 
         builder.Property(x => x.CreateAt)
             .HasColumnName("create_at")
-            .HasColumnType("timestamp")
+            .HasColumnType("timestamptz")
             .IsRequired();
     }
 }
