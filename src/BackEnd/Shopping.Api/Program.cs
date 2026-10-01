@@ -5,6 +5,8 @@ using Shopping.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 builder.WebHost.ConfigureKestrel(x =>
 {
     x.AddServerHeader = false;
@@ -15,7 +17,6 @@ builder.Services.AddDbContext<AppDbContext>(x =>
 
 builder.AddInfra();
 builder.Services.AddApplication();
-builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -24,6 +25,10 @@ app.UseHsts();
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 

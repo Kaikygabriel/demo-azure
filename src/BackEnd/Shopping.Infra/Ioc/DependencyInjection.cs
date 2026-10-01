@@ -1,5 +1,8 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Shopping.Application.Configurations;
 using Shopping.Application.Interfaces.Queries;
 using Shopping.Application.Interfaces.Repositories;
@@ -54,6 +57,34 @@ public static class DependencyInjection
 
             StripeConfiguration.ApiKey =
                 builder.Configuration["Stripe:ApiKey"] ?? throw new Exception("Stripe api key not found !");
+        #endregion
+
+        #region Authentication
+
+
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.SaveToken = true;
+                x.RequireHttpsMetadata = false;
+                x.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ClockSkew = TimeSpan.FromMinutes(1),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:Key"] ?? throw new Exception("Token key not found !")))
+                };
+            });
+
+            builder.Services.AddAuthorization(x=>
+                x.AddPolicy(Policy.Admin,r=>r.RequireRole("Admin")));
+            
         #endregion
 
         return builder;

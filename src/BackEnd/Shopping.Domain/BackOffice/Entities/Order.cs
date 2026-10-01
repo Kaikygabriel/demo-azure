@@ -21,8 +21,10 @@ public sealed class Order : Entity
         UserId = user.Id;
         
         StatePayment = EStatePayment.Waiting;
+        CreateAt = DateTime.UtcNow;
     }
 
+    public DateTime CreateAt { get; private init; }
     public string Uri { get; private set; }
     public EStatePayment StatePayment { get; private set; }
     
