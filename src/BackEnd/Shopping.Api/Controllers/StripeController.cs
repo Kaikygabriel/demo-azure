@@ -1,5 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shopping.Api.Extensions;
+using Shopping.Application.UsesCases.Order.Command.Request;
 using Stripe;
 
 namespace Shopping.Api.Controllers;
@@ -8,13 +10,20 @@ namespace Shopping.Api.Controllers;
 [Route("[controller]")]
 public class StripeController : ControllerBase
 {
-    // private readonly ISender _sender;
-    //
-    // public StripeController(ISender sender)
-    // {
-    //     _sender = sender;
-    // }
+    private readonly ISender _sender;
+    
+    public StripeController(ISender sender)
+    {
+        _sender = sender;
+    }
 
+    [HttpPost("session")]
+    public async Task<ActionResult> CreateSession(CreateSessionRequest request,CancellationToken cancellation)
+    {
+        var result = await _sender.Send(request,cancellation);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+    }
+    
     [HttpPost("/web-hook")]
     public async Task<ActionResult> WebHook()
     { 

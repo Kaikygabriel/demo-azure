@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shopping.Api.Extensions;
 using Shopping.Application.UsesCases.Users.Command.Request;
 
 namespace Shopping.Api.Controllers;
@@ -19,18 +20,18 @@ public class UsersController : ControllerBase
     public async Task<ActionResult> Register([FromBody] RegisterUserRequest request, CancellationToken cancellation = default)
     {
         var result = await _sender.Send(request,cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
     [HttpPost("Login")]
     public async Task<ActionResult> Login([FromBody] LoginUserRequest request, CancellationToken cancellation = default)
     {
         var result = await _sender.Send(request,cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
     [HttpPost("Refresh-Token")]
     public async Task<ActionResult> RefreshToken([FromBody] LoginByRefreshTokenRequest request, CancellationToken cancellation = default)
     {
         var result = await _sender.Send(request,cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
 }

@@ -25,7 +25,7 @@ public sealed class Order : Entity
     }
 
     public DateTime CreateAt { get; private init; }
-    public string Uri { get; private set; }
+    public string? Uri { get; private set; }
     public EStatePayment StatePayment { get; private set; }
     
     public Guid ProductId { get; private init; }

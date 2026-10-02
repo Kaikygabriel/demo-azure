@@ -1,10 +1,13 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shopping.Api.Extensions;
 using Shopping.Application.UsesCases.Order.Command.Request;
 using Shopping.Application.UsesCases.Order.Queries.Request;
 
 namespace Shopping.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class OrdersController : ControllerBase
@@ -20,7 +23,7 @@ public class OrdersController : ControllerBase
     public async Task<ActionResult> Create([FromBody] CreateOrderRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request,cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
 
     [HttpGet]
@@ -28,6 +31,6 @@ public class OrdersController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request,cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
 }

@@ -21,7 +21,7 @@ internal sealed class PayService : IPayService
 
     public async Task<ResultValue<string>> CreateSession(Order order, CancellationToken cancellationToken = default)
     {
-        var options = new SessionCreateOptions()
+        var options = new SessionCreateOptions
         {
             LineItems =
             [
@@ -38,8 +38,8 @@ internal sealed class PayService : IPayService
             ],
             CustomerEmail = order.User.Email.Address,
             Currency = "BRL",
-            CancelUrl = "",
-            SuccessUrl = "",
+            CancelUrl = "google.com",
+            SuccessUrl = "google.com",
             ExpiresAt = DateTime.UtcNow.AddDays(7),
             PaymentIntentData = new SessionPaymentIntentDataOptions()
             {

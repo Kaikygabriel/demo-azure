@@ -1,7 +1,10 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shopping.Api.Extensions;
 using Shopping.Application.UsesCases.Categories.Command.Request;
 using Shopping.Application.UsesCases.Categories.Queries.Request;
+using Shopping.Infra.Configurations;
 
 namespace Shopping.Api.Controllers;
 
@@ -17,16 +20,17 @@ public sealed class CategoriesController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy.Admin)]
     public async Task<ActionResult> Create([FromBody] CreateCategoryRequest request, CancellationToken cancellation)
     {
         var result = await _sender.Send(request, cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
 
     [HttpGet]
     public async Task<ActionResult> GetAll([FromQuery] GetAllCategoriesRequest request, CancellationToken cancellation)
     {
         var result = await _sender.Send(request, cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
 }
