@@ -24,6 +24,12 @@ internal sealed class CreateSessionHandler: IRequestHandler<CreateSessionRequest
         if(order is null)
             return new Error("Order not Found!");
 
+
+        Console.WriteLine(order.Id);
+        Console.WriteLine(order.Product is null ? "Product is null" : "product not null");
+        Console.WriteLine(order.User is null ? "User is null" : "User not null");
+        Console.WriteLine(order.User.Email.Address );
+        
         var result = await _payService.CreateSession(order, cancellationToken);
         if (!result.IsSuccess)
             return result.Error;

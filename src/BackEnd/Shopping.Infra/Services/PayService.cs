@@ -21,6 +21,7 @@ internal sealed class PayService : IPayService
 
     public async Task<ResultValue<string>> CreateSession(Order order, CancellationToken cancellationToken = default)
     {
+        
         var options = new SessionCreateOptions
         {
             LineItems =
@@ -31,22 +32,26 @@ internal sealed class PayService : IPayService
                     PriceData = new SessionLineItemPriceDataOptions()
                     {
                         Currency = "BRL",
-                        Product = order.Product.Title,
+                        ProductData = new SessionLineItemPriceDataProductDataOptions()
+                        {
+                          
+                            Name = order.Product.Title,
+                            Description = order.Product.Summary
+                        },
                         UnitAmount = (int)(order.Total * 100)
                     }
                 }
             ],
             CustomerEmail = order.User.Email.Address,
             Currency = "BRL",
-            CancelUrl = "google.com",
-            SuccessUrl = "google.com",
+            CancelUrl = "https://localhost:7208/cancel",
+            SuccessUrl = "https://localhost:7208/success",
             ExpiresAt = DateTime.UtcNow.AddDays(7),
             PaymentIntentData = new SessionPaymentIntentDataOptions()
             {
-                Metadata =
+                Metadata =new Dictionary<string, string>
                 {
-                    {"order",order.Id.ToString()},
-                    {"user",order.User.Id.ToString()}
+                    {"order",order.Id.ToString()}
                 }
             },
             PaymentMethodTypes = ["boleto","card"],
