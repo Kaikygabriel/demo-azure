@@ -8,7 +8,6 @@ using Shopping.Infra.Configurations;
 
 namespace Shopping.Api.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class ProductsController : ControllerBase
@@ -22,7 +21,7 @@ public class ProductsController : ControllerBase
 
     [HttpPost]
     [RequestSizeLimit(1024 * 1024)] //1 mb
-    [Authorize(Policy.Admin)]
+    //[Authorize(Policy.Admin)]
     public async Task<ActionResult> Create([FromBody] CreateProductRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request, cancellationToken);
@@ -33,7 +32,7 @@ public class ProductsController : ControllerBase
     // Image
     [HttpPost("Image")]
     [RequestSizeLimit(1024 * 900)] //900 kb
-    [Authorize(Policy.Admin)]
+    //[Authorize(Policy.Admin)]
     public async Task<ActionResult> AddImage([FromBody] AddImageInProductRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request, cancellationToken);
@@ -48,7 +47,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("By")]
-    [Authorize]
+   // [Authorize]
     public async Task<ActionResult> GetById([FromQuery]GetProductByIdRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request, cancellationToken);

@@ -46,7 +46,6 @@ internal sealed class PayService : IPayService
             Currency = "BRL",
             CancelUrl = "https://localhost:7208/cancel",
             SuccessUrl = "https://localhost:7208/success",
-            ExpiresAt = DateTime.UtcNow.AddDays(7),
             PaymentIntentData = new SessionPaymentIntentDataOptions()
             {
                 Metadata =new Dictionary<string, string>

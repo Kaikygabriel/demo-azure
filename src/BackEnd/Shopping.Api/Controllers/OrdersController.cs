@@ -7,7 +7,6 @@ using Shopping.Application.UsesCases.Order.Queries.Request;
 
 namespace Shopping.Api.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class OrdersController : ControllerBase

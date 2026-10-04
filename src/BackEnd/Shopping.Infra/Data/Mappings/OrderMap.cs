@@ -18,7 +18,7 @@ internal sealed class OrderMap : IEntityTypeConfiguration<Order>
 
         builder.Property(x => x.Uri)
             .HasColumnName("uri")
-            .HasColumnType("varchar(380)")
+            .HasColumnType("text")
             .IsRequired(false);
         
         builder.Property(x => x.StatePayment)
