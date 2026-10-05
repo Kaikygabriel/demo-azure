@@ -1,5 +1,4 @@
 using Shopping.Application.Dto.Stripe;
-using Shopping.Application.Interfaces.Repositories;
 using Shopping.Application.Interfaces.Services;
 using Shopping.Domain.BackOffice.Commum;
 using Shopping.Domain.BackOffice.Entities;
@@ -10,14 +9,6 @@ namespace Shopping.Infra.Services;
 
 internal sealed class PayService : IPayService
 {
-    private readonly IOrderRepository _orderRepository;
-    private readonly IUnitOfWork _unitOfWork;
-
-    public PayService(IOrderRepository orderRepository, IUnitOfWork unitOfWork)
-    {
-        _orderRepository = orderRepository;
-        _unitOfWork = unitOfWork;
-    }
 
     public async Task<ResultValue<string>> CreateSession(Order order, CancellationToken cancellationToken = default)
     {
@@ -48,7 +39,7 @@ internal sealed class PayService : IPayService
             SuccessUrl = "https://localhost:7208/success",
             PaymentIntentData = new SessionPaymentIntentDataOptions()
             {
-                Metadata =new Dictionary<string, string>
+                Metadata =new Dictionary<string, string>()
                 {
                     {"order",order.Id.ToString()}
                 }
@@ -73,8 +64,9 @@ internal sealed class PayService : IPayService
         if (!result.Data.Any())
             return new Error("Transactions Not Found!");
 
+        
         return result.Data.Select(x =>
-            new StripeTransactionResponse( x.Id, x.Amount, x.AmountCaptured, x.Status, x.Customer.Email, x.Paid,
+            new StripeTransactionResponse( x.Id, x.Amount, x.AmountCaptured, x.Status, x.ReceiptEmail ?? "email", x.Paid,
                 x.Refunded)).ToList();  
     }
 }

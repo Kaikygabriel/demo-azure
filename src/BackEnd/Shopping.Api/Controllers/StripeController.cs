@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shopping.Api.Extensions;
 using Shopping.Application.UsesCases.Order.Command.Request;
@@ -17,7 +18,15 @@ public class StripeController : ControllerBase
         _sender = sender;
     }
 
+    [HttpGet("Verify/State")]
+    //[Authorize]
+    public async Task<ActionResult> VerifyState([FromQuery]AlterStatusOrderRequest request,CancellationToken cancellation)
+    {
+        var result = await _sender.Send(request, cancellation);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+    }
     [HttpPost("session")]
+    //[Authorize]
     public async Task<ActionResult> CreateSession(CreateSessionRequest request,CancellationToken cancellation)
     {
         var result = await _sender.Send(request,cancellation);

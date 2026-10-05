@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Shopping.Api.Extensions;
 using Shopping.Application.UsesCases.Products.Commands.Request;
 using Shopping.Application.UsesCases.Products.Queries.Request;
-using Shopping.Infra.Configurations;
 
 namespace Shopping.Api.Controllers;
 

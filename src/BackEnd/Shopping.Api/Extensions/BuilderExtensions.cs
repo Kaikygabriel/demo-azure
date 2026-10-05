@@ -23,7 +23,8 @@ public static class BuilderExtensions
         return builder;
     }
     public static WebApplicationBuilder AddConfigurations(this WebApplicationBuilder builder)
-    {builder.Services.AddControllers();
+    {
+        builder.Services.AddControllers();
 
         builder.WebHost.ConfigureKestrel(x =>
         {
@@ -39,7 +40,7 @@ public static class BuilderExtensions
                     factory: partition => new FixedWindowRateLimiterOptions
                     {
                         AutoReplenishment = true,
-                        PermitLimit = 5,
+                        PermitLimit = 50,
                         QueueLimit = 0,
                         Window = TimeSpan.FromMinutes(1)
                     }));

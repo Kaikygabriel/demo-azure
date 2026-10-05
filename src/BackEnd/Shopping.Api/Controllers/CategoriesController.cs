@@ -20,6 +20,7 @@ public sealed class CategoriesController : ControllerBase
     }
 
     [HttpPost]
+    //e[Authorize(Policy.Admin)]
     public async Task<ActionResult> Create([FromBody] CreateCategoryRequest request, CancellationToken cancellation)
     {
         var result = await _sender.Send(request, cancellation);

@@ -19,6 +19,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost]
+    //[Authorize]
     public async Task<ActionResult> Create([FromBody] CreateOrderRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request,cancellationToken);
@@ -26,6 +27,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
+    //[Authorize]
     public async Task<ActionResult> GetById([FromQuery] GetOrderByIdRequest request,
         CancellationToken cancellationToken)
     {
