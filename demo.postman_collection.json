@@ -1,0 +1,641 @@
+{
+  "info": {
+    "_postman_id": "1b578549-0d18-410c-aa01-e528d110de7a",
+    "name": "Louja",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46497177",
+    "_collection_link": "https://go.postman.co/collection/46497177-1b578549-0d18-410c-aa01-e528d110de7a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Email\" : \"kaiky@gmail.com\",\n    \"Password\" : \"aluno.2022\",\n    \"Name\" : \"kaiky\",\n    \"Cep\" : \"620820\",\n    \"Address\" : \"Novo Horizonte\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7208/Users/Register",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Users",
+                "Register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Register-Exemple",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"Email\" : \"kaiky@gmail.com\",\n    \"Password\" : \"aluno.2022\",\n    \"Name\" : \"kaiky\",\n    \"Cep\" : \"620820\",\n    \"Address\" : \"Novo Horizonte\"\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7208/Users/Register",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Users",
+                    "Register"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Email\" : \"kaiky@gmail.com\",\n    \"Password\" : \"aluno.2022\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7208/Users/Login",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Users",
+                "Login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login-Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"Email\" : \"kaiky@gmail.com\",\n    \"Password\" : \"aluno.2022\"\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7208/Users/Login",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Users",
+                    "Login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Login by Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RefreshToken\" : \"/wGs0VPxre7dE+bwP3XMCCICha3A9UmMGr3fFczOFb+0Nmds/33k9LwhNeu4RzHcHjyh3GzcVfeLJ2YTEKEhxOdxNLtcjaazUa3+cLSYf25VDv7shG6apxRHj/bjMtexgAOy1cC24cf0tdY4+0gQ1yVsZH5P1QpRjUQvSr0Du2s=\",\n  \"UserId\" : \"860f3467-dfe0-4a0a-b128-34ee8e2e187c\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7208/Users/Refresh-Token",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Users",
+                "Refresh-Token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Create-Category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Title\" : \"Hardware\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7208/Categories",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Categories"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create-Category",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Title\" : \"Hardware\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7208/Categories",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Categories"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Get-Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7208/Categories?page=1&pageSize=25",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Categories"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "25"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get-Categories",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7208/Categories?page=1&pageSize=25",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Categories"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CategoryId\" : \"542e2c83-10e2-4604-b109-d68d4704127e\",\n  \"Title\" : \"Gtx1630\",\n  \"Summary\" : \"Placa de video da nvidea\",\n  \"Stock\" : 1,\n  \"Price\" : 1200,\n  \"ImageDto\": {\n    \"Extension\": \".png\",\n    \"Base64\" : \"iVBORw0KGgoAAAANSUhEUgAAAScAAAAzCAYAAADVas54AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABBBSURBVHhe7Z1XjBZVG8fP-y6IYgPBhg27fiqW2I29xAtvTPTCC-OFEYxG0einhnDBhVEjYNQI-mkUa2JvMYpii11jBY2yWGLBCjaW7eU7v2fmeTnv2SnvvNt3zy_Onl5mdp7_POfMsJZ22-M_PSYQCASGGeU4DAQCgWFFEKdAIDAsCeIUCASGJaWlLy3L2HMqxWFSFbdM4y5uflYdKNLej0ORsqR80DLNBz_tpwKBwEBRampq6jGlUmGjK9k2iph3jxp5NVpPionaiNt22JEzt8IzH87nGuh35BaPooEiJOhHqb29vZLri0ZP3CBJTDaITvavYlgLUQq1zLnIeY3EaxAIDCZJOlIlTnkkCdJIM7yi882qX2tfI-0aBQKDSZqDU2pra5MS14CyPKYk_Hr-YMPdOPPml1Ve7zUKBALpwgQVccoCw0rzlsivxfBGinFmzTPvHPpaHgiMJbKECUqtra1SA8PpbwFK6284UM_5QFa7evsMBMYiNYlTrSJCWVpd8v22mibUYyhhjjp_9zyUtPkl5dea5zPU1yAQGA4k2Z9PqaWlpVctNaAkwfGh3B2oXC7LQT5hMlp_6Ay1u7tb5q2HknS-adegSF2XWuoEAqMZ1-aSoLzU3NxcqeUajRRmGKV2rnUIGxoaYmGSrByGh4FyHhwqVi7--Sddj1rzXPLKA4HRjG9nPlpeJtSqaqha6IeKmyaOIG200UZWnGoVpuEDQsH8VVhdss67L_RXP4HASCPv3nfLS20dHT1dHR29GtXydKdOQ7nBjBs_Lkrbg16kZVXzSq5Dfv9DQVdXlxz--bvprDKXtHwlrzwQGG0UEadyV7f1fMZF4kKBFmrcz3PB0xi_0fg4ZcudsLrqyDFC9aD8c3XTWWWBQKB_kGUd4tEQCxSosblGx54MkKf542ybTMNMLRreYpUmUC5-WeZ1CAQCuTbil5et1Bi8J1Mq2_82GGSSGIHGJ0yYkLssqR7KJb0kCcZsa2uLUwMP54VAgX_uSdcijb6WBwKjhXpsQXaAKeiyYlQuN4hhakVCPTQNSZvHxcmerI-OPVhwHfQcax07qd5gzzsQGA1gN2X1fcSG8J5icfJNirQaGsu5KKc49PH777-bFStWyMbzQMAY__zzj_n333_jnPpwBVjP3cfPT6s3GhjN5xYYfpT1hkOORJKsQEUZkcdUOeJlnnoUcbNCsFT87rvvzOLFi81LLy2rLB0HgjVr1pgvv_zSrFm7VuZfD5wn5-uT1B95v_32m3nooYfMypUr49zonBHKX375RcpbW1sr571u3Trz5ptvmsbGxrrnmAR9_fDDD-att96SsV0YG9EmXwXcnVMaLKsffPBB8-677w7o7y0w9vDvfU03zJk7d57E4k1qXCl5lW7jiJX7Z-gwVLymceOi_ZhaUNvmhv7pp5_MLbfcYg1inZl14YVm8qRJicafBHOKPLZ86HPixInm77__Nr_--quZMmWKGT9-fM1j-bgXz-1D4xp--umnYsCTJ082--23n5zzJ598Ym666SbzzDPPmJdfftl88cUXZp999jGbbrqpWb16tZTR_yGHHFL3_Hzo75VXXhGhPOigg8zWW28dl0Qic80119iHw0tS57XXXhPB2Xzzzc12220nc_DnQX-I_e23325aWlrMEUccUdmTCwTycO2nCGWaadMe2RiPbs5uOuQ_G2rnhNEbOknWBHW7bb8rVzaaRYsWmwkbb2wuv_wys-OOO8pYA8XGdpz999_fTLJCsXz5cllK1nORkgzVR_MOPvhgc-WVV5qTTjpJxHTZsmVm_vz5cs1OO-00c-ihh5pVq1aZBQsWmL_--kvaIWCuJ0Le-vXrxaPp7OyMc43EERatS4jH4y6NOzo6TFNTk4RAHX--5OHF0XbPPfeU3wMe3MKFC82SJUtkbGCs9vZ2GZc-t9pqK3PppZeac845RzzKpLHJ0_FI0y9i5s8hEFCy7o0qz4lqZYSpu0uWca5hEqcjjL4IGAPLnAUL5tun82bmv9Z4d9hhmozDmLXKUxHPScGIMCqMZPXPP5uJm2wiHpUvOHmokWs7PwTKv_76a_PAAw-Ip4K3dtddd4mBX3311eb44483hx9-uHgo7733nhj_LrvsYl5__XUJ8Zyoe__994tIPP_88-JlzZgxQ7y-J554Qo7dd9_dbLnlluarr74yN954o4yFx_Pnn3-a66-_3jz99NPm888_lzmztDvuuOOqPCdEgzp77bWXueKKK8wxxxxjjjrqKPPxxx-bzz77TASL-jfccIOIOvmc00477WQeeeQRmTcHHh8eIuLGud99993mscceM4cddph4rMzlySefNG-88YaZOnWq2X777Qtf98DYwxUr2WCKbpko0ymTilqZm70otPnoo4_scmCx2XvvveXJi1iU4n2tSA4HFpYfLKOmWeNY1dgo-z7uBegLfj94CSxdEUMMGG8No955551lHhwnnniimTdvnjnllFPiVhH09dRTT5kXX3zRivcO4oXhZV133XXi6SA-LAMRMOoy1o8__iieDl4YYvHtt9_KWJR_-OGHcc_JIBSIN3OaZJfXJ5xwgggXY_F7Y6wPPvhAzmffffeVT0eIM4_p06fLObKnxXxo9_7774vwIkzXXnuteH5HHnmkCClL-XfeeaeueygwdnFeRyEWsVx4tluvMdPu8ccftzdykzn33HPNtttuOyRPTwwQg7eDm5-tB-UuR-oh63poGWOwzFGPQfMxcrwfRMuFcgx4iy22MLNnzzazZs0yp556qrxAwEvSOgpxPRAExIR9rksuucQumy8306ZNi2vmw_zwbqC5uVlCQLyuuuoqeai4_SFmPGwQQ8Se-SGSRx99tPn---9FlM844wz5nZ933nnibbO_5S5TA2MD954tiogTzaMjjvWTfnBzX3DBBWabbbYxC-2TnbdSQwFP92---UZOa9fpu4pYFUEvcNKFTrv4nDv_GJqN5FqgH96esU_GZrkKKsKB-GRBOZ4aSyzasnTdY489Cj0I9K3eJnbpq7DcxPNhLvSl_RGyKY7HxtKTjX48Yrw99qcQIZam559_vpk7d654W_wOOAKBWtHvBqLAojGMpWKU8jPKKwI3MV4CT_LOjk5z26JF_f7aPA-MdvmK5bIMmXHggWbS5NrfEPYF9onYd1JPQq8n-zoXXXSRueOOO-KaEcwJrwoPSJc_eCO0wfNA7PDGdFmnG9eACNJeN9Gp98cff8Sl2TAWfbEPxp4e3q2SJuKMtdtuu4mXx54Ue22I4WabbRb_dYoG8bZ4u3fnnXeKUM2ZM0dEMxBQsnSAslicqo3VbSJxp5OiSyJuZG74yy6bbaZOmWr-9787rYEu7_PSKg9ODkNuXNVouru6RSTr2QxPu4BZFxYYiz0XDJ9Nbl7XL126VDbJWTqdfPLJcc0I5sXeDpvYbFi__fbbshTCE2LuGD99kccmM58C6BzwWticRviee-458-yzz8pSK2uOiNcLL7wg-1yL7EODlxYHWvFmozwP5somPEs7PCe8Q95EIkx4e5z7q6--Kg8ilqo333yzzDcQyMK_X-ULcc1LNFuvAU_mgvYtNzObqDNnXiDeAR9hsszKM_C-wIYxHlOzNegDDjhAvJiiwgR4Fu48s-ZM_3g4hHhOZ555pjn99NPlrdett94qHgQe3MyZM0VwqIeXoW3OOuss2aPirddtt91m1q5day6--GJ5g8YyipCPNu-55x65jtqWZTOv-PESH374YREdlmRa7qJzxEO77777zKOPPiofq7K_teGFxYbz4FDI0_4YnzeB3A_ksaRjPET07LPPls18Pk-499575SFx7LHHVvUVCORRWtfC3xCPUxbun-7ODntUb15yY1Gtwd6IPM2L3mhUZyA-ilyy5F67hGiQjd8JE_I_TaAdhlfrZwzUZ6nBXgwGzb5JvYaBYekyS_tIC9kAZ0zGUy8N4-WtGm_BECyWQ3g5GDJvuRAg9nnYZGbe7NlQlzI8TsRCBUHL6IcNbJZx9EV72rJ8ZO-IvhAPBJr2eDQK5-K-sWSOlDNn_VRD-yKtYoWnSx6_A_onj2vD_InjSSmMQV3KuA6UuXtZgbGD3mdJ-GVumnhvcbJHd1dvcbJ3IC3kRuSGGz--2MeYNAcGw4C5cTFU_rFxHrQpIk7AEoi5YhSE9YCRYYCK9pMWKn6-e4HJc-vLLyEhT3HzQcvI17aK384vd8kaA5La1poHef0HxgbufeDjl7lpua9UnLh9KCJUcdK0wA1GAxvy5EagsgbuhW1e6au6Z4sb7w3jFBWnPmPHbLfeCx6DGldeCGlxJSkP0vIDgZFMlkb4ZW6auF0vxEbh2UaW7LDk4CiGO0BxQ9SlzWDBn5DR5VwgEBh8rMUjQ7zmjjJq0Q3qsp9Rs_Fm9mkLs5TQglfh7psMNKg2e0WEwaMJBIYGeVuXZH6qFxXdiCMS2Ab8w2A2gJ0aGWQYeC3NBxl3E1wJIhUIDC5l6xtgeSIfrvlpnNDXDy3r7Owyzc2RB5Vqu2n5Ssn2nldnkMBTSno755IlUnkCFgQuEKideFmX4sDYzKr8XsbVIxvGLS2t8nfIKXarEI1kL4qnkzj6oIIwsY_Gcq4WgtAEAn3DtyE3TTzeEI8yI4lwGtjohtJq3I66ujrN-qYm09aG1-GIlFTBN6PnNAGqVBwSdH-JJWqaMHGu1EvCv8CBQKB_KK1raYutLtoUx9i6O9tNl2OoIh8YaBzGFSO9sYFrnrxV4wNDPuDjiGzXrTH0IDR4fCzfCF3hUbFxRcfPSyqDtDj4aZ-88kBgJJL2UFf88ipbTBKnnk6WNx0iKRQSSn4cuqKk5RVsuab5u03lcvSBIaKVaoBOm4GCk0463Dnlxf0QaomDn_bJKw8ERirYWRp-mZuWjzBtIAk11p4uK04diJPNp0jzaWBDstgydr88knKpoL3FP20QDYhISVYvBtswk8Zz8zSelAdJ5ZBWH_y0T155IDBSqVucmqznpMkqcbLLOl6kxRqDtDhxWzcObQNJbLCtqtKq_FT7swVpRYNBmpC4-UnxvHLFT_vklQcCI5kscYI0gao4P5iHGElsJxLYHxtkJkJlJDIojWuaRBSPjihruKLzVNy0n68klQcCgXTqtZWyKo9ql3bjpyv9E1YMVIIKvSehIhUbvROvyu9HkvpPO5SktJIWd0nLDwQCxVF7Yru6IkARUUrzNhieVy_Op5yjImZxOjrizBgvWYH_E0t1u_qPIvhtktJKLXHw03kUrR8IjDbSbCBa1vUqjNLWVCWslDv1JOambbz3IFFepcyNDxLu-P6RRV55Eklt6uknEBjriI02tbar01O1Ic53TuxLqW3ZqvyIjI0WUZIMGkqoaQl7gSDEUY-hMuC0cd18v06tZUpSnkteeSAwWii6MV69Ie7JCqlYh-RHpbS6mhhYb0kijSBFh_0RHYOMjp90-Pj5fp2kNkpaf1nklQcCo4mi93tpvfWcVIA0op6TQpn-jzAlQWAHkjbEo4zq0BI7VDEYfhz1GEojTRvbzy-ahrS-IassEBit1O49GfN_RprkQ_D4GFgAAAAASUVORK5CYII\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7208/Products",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CategoryId\" : \"542e2c83-10e2-4604-b109-d68d4704127e\",\n  \"Title\" : \"Gtx1630\",\n  \"Summary\" : \"Placa de video da nvidea\",\n  \"Stock\" : 1,\n  \"Price\" : 1200,\n  \"ImageDto\": {\n    \"Extension\": \".png\",\n    \"Base64\" : \"iVBORw0KGgoAAAANSUhEUgAAAScAAAAzCAYAAADVas54AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABBBSURBVHhe7Z1XjBZVG8fP-y6IYgPBhg27fiqW2I29xAtvTPTCC-OFEYxG0einhnDBhVEjYNQI-mkUa2JvMYpii11jBY2yWGLBCjaW7eU7v2fmeTnv2SnvvNt3zy_Onl5mdp7_POfMsJZ22-M_PSYQCASGGeU4DAQCgWFFEKdAIDAsCeIUCASGJaWlLy3L2HMqxWFSFbdM4y5uflYdKNLej0ORsqR80DLNBz_tpwKBwEBRampq6jGlUmGjK9k2iph3jxp5NVpPionaiNt22JEzt8IzH87nGuh35BaPooEiJOhHqb29vZLri0ZP3CBJTDaITvavYlgLUQq1zLnIeY3EaxAIDCZJOlIlTnkkCdJIM7yi882qX2tfI-0aBQKDSZqDU2pra5MS14CyPKYk_Hr-YMPdOPPml1Ve7zUKBALpwgQVccoCw0rzlsivxfBGinFmzTPvHPpaHgiMJbKECUqtra1SA8PpbwFK6284UM_5QFa7evsMBMYiNYlTrSJCWVpd8v22mibUYyhhjjp_9zyUtPkl5dea5zPU1yAQGA4k2Z9PqaWlpVctNaAkwfGh3B2oXC7LQT5hMlp_6Ay1u7tb5q2HknS-adegSF2XWuoEAqMZ1-aSoLzU3NxcqeUajRRmGKV2rnUIGxoaYmGSrByGh4FyHhwqVi7--Sddj1rzXPLKA4HRjG9nPlpeJtSqaqha6IeKmyaOIG200UZWnGoVpuEDQsH8VVhdss67L_RXP4HASCPv3nfLS20dHT1dHR29GtXydKdOQ7nBjBs_Lkrbg16kZVXzSq5Dfv9DQVdXlxz--bvprDKXtHwlrzwQGG0UEadyV7f1fMZF4kKBFmrcz3PB0xi_0fg4ZcudsLrqyDFC9aD8c3XTWWWBQKB_kGUd4tEQCxSosblGx54MkKf542ybTMNMLRreYpUmUC5-WeZ1CAQCuTbil5et1Bi8J1Mq2_82GGSSGIHGJ0yYkLssqR7KJb0kCcZsa2uLUwMP54VAgX_uSdcijb6WBwKjhXpsQXaAKeiyYlQuN4hhakVCPTQNSZvHxcmerI-OPVhwHfQcax07qd5gzzsQGA1gN2X1fcSG8J5icfJNirQaGsu5KKc49PH777-bFStWyMbzQMAY__zzj_n333_jnPpwBVjP3cfPT6s3GhjN5xYYfpT1hkOORJKsQEUZkcdUOeJlnnoUcbNCsFT87rvvzOLFi81LLy2rLB0HgjVr1pgvv_zSrFm7VuZfD5wn5-uT1B95v_32m3nooYfMypUr49zonBHKX375RcpbW1sr571u3Trz5ptvmsbGxrrnmAR9_fDDD-att96SsV0YG9EmXwXcnVMaLKsffPBB8-677w7o7y0w9vDvfU03zJk7d57E4k1qXCl5lW7jiJX7Z-gwVLymceOi_ZhaUNvmhv7pp5_MLbfcYg1inZl14YVm8qRJicafBHOKPLZ86HPixInm77__Nr_--quZMmWKGT9-fM1j-bgXz-1D4xp--umnYsCTJ082--23n5zzJ598Ym666SbzzDPPmJdfftl88cUXZp999jGbbrqpWb16tZTR_yGHHFL3_Hzo75VXXhGhPOigg8zWW28dl0Qic80119iHw0tS57XXXhPB2Xzzzc12220nc_DnQX-I_e23325aWlrMEUccUdmTCwTycO2nCGWaadMe2RiPbs5uOuQ_G2rnhNEbOknWBHW7bb8rVzaaRYsWmwkbb2wuv_wys-OOO8pYA8XGdpz999_fTLJCsXz5cllK1nORkgzVR_MOPvhgc-WVV5qTTjpJxHTZsmVm_vz5cs1OO-00c-ihh5pVq1aZBQsWmL_--kvaIWCuJ0Le-vXrxaPp7OyMc43EERatS4jH4y6NOzo6TFNTk4RAHX--5OHF0XbPPfeU3wMe3MKFC82SJUtkbGCs9vZ2GZc-t9pqK3PppZeac845RzzKpLHJ0_FI0y9i5s8hEFCy7o0qz4lqZYSpu0uWca5hEqcjjL4IGAPLnAUL5tun82bmv9Z4d9hhmozDmLXKUxHPScGIMCqMZPXPP5uJm2wiHpUvOHmokWs7PwTKv_76a_PAAw-Ip4K3dtddd4mBX3311eb44483hx9-uHgo7733nhj_LrvsYl5__XUJ8Zyoe__994tIPP_88-JlzZgxQ7y-J554Qo7dd9_dbLnlluarr74yN954o4yFx_Pnn3-a66-_3jz99NPm888_lzmztDvuuOOqPCdEgzp77bWXueKKK8wxxxxjjjrqKPPxxx-bzz77TASL-jfccIOIOvmc00477WQeeeQRmTcHHh8eIuLGud99993mscceM4cddph4rMzlySefNG-88YaZOnWq2X777Qtf98DYwxUr2WCKbpko0ymTilqZm70otPnoo4_scmCx2XvvveXJi1iU4n2tSA4HFpYfLKOmWeNY1dgo-z7uBegLfj94CSxdEUMMGG8No955551lHhwnnniimTdvnjnllFPiVhH09dRTT5kXX3zRivcO4oXhZV133XXi6SA-LAMRMOoy1o8__iieDl4YYvHtt9_KWJR_-OGHcc_JIBSIN3OaZJfXJ5xwgggXY_F7Y6wPPvhAzmffffeVT0eIM4_p06fLObKnxXxo9_7774vwIkzXXnuteH5HHnmkCClL-XfeeaeueygwdnFeRyEWsVx4tluvMdPu8ccftzdykzn33HPNtttuOyRPTwwQg7eDm5-tB-UuR-oh63poGWOwzFGPQfMxcrwfRMuFcgx4iy22MLNnzzazZs0yp556qrxAwEvSOgpxPRAExIR9rksuucQumy8306ZNi2vmw_zwbqC5uVlCQLyuuuoqeai4_SFmPGwQQ8Se-SGSRx99tPn---9FlM844wz5nZ933nnibbO_5S5TA2MD954tiogTzaMjjvWTfnBzX3DBBWabbbYxC-2TnbdSQwFP92---UZOa9fpu4pYFUEvcNKFTrv4nDv_GJqN5FqgH96esU_GZrkKKsKB-GRBOZ4aSyzasnTdY489Cj0I9K3eJnbpq7DcxPNhLvSl_RGyKY7HxtKTjX48Yrw99qcQIZam559_vpk7d654W_wOOAKBWtHvBqLAojGMpWKU8jPKKwI3MV4CT_LOjk5z26JF_f7aPA-MdvmK5bIMmXHggWbS5NrfEPYF9onYd1JPQq8n-zoXXXSRueOOO-KaEcwJrwoPSJc_eCO0wfNA7PDGdFmnG9eACNJeN9Gp98cff8Sl2TAWfbEPxp4e3q2SJuKMtdtuu4mXx54Ue22I4WabbRb_dYoG8bZ4u3fnnXeKUM2ZM0dEMxBQsnSAslicqo3VbSJxp5OiSyJuZG74yy6bbaZOmWr-9787rYEu7_PSKg9ODkNuXNVouru6RSTr2QxPu4BZFxYYiz0XDJ9Nbl7XL126VDbJWTqdfPLJcc0I5sXeDpvYbFi__fbbshTCE2LuGD99kccmM58C6BzwWticRviee-458-yzz8pSK2uOiNcLL7wg-1yL7EODlxYHWvFmozwP5somPEs7PCe8Q95EIkx4e5z7q6--Kg8ilqo333yzzDcQyMK_X-ULcc1LNFuvAU_mgvYtNzObqDNnXiDeAR9hsszKM_C-wIYxHlOzNegDDjhAvJiiwgR4Fu48s-ZM_3g4hHhOZ555pjn99NPlrdett94qHgQe3MyZM0VwqIeXoW3OOuss2aPirddtt91m1q5day6--GJ5g8YyipCPNu-55x65jtqWZTOv-PESH374YREdlmRa7qJzxEO77777zKOPPiofq7K_teGFxYbz4FDI0_4YnzeB3A_ksaRjPET07LPPls18Pk-499575SFx7LHHVvUVCORRWtfC3xCPUxbun-7ODntUb15yY1Gtwd6IPM2L3mhUZyA-ilyy5F67hGiQjd8JE_I_TaAdhlfrZwzUZ6nBXgwGzb5JvYaBYekyS_tIC9kAZ0zGUy8N4-WtGm_BECyWQ3g5GDJvuRAg9nnYZGbe7NlQlzI8TsRCBUHL6IcNbJZx9EV72rJ8ZO-IvhAPBJr2eDQK5-K-sWSOlDNn_VRD-yKtYoWnSx6_A_onj2vD_InjSSmMQV3KuA6UuXtZgbGD3mdJ-GVumnhvcbJHd1dvcbJ3IC3kRuSGGz--2MeYNAcGw4C5cTFU_rFxHrQpIk7AEoi5YhSE9YCRYYCK9pMWKn6-e4HJc-vLLyEhT3HzQcvI17aK384vd8kaA5La1poHef0HxgbufeDjl7lpua9UnLh9KCJUcdK0wA1GAxvy5EagsgbuhW1e6au6Z4sb7w3jFBWnPmPHbLfeCx6DGldeCGlxJSkP0vIDgZFMlkb4ZW6auF0vxEbh2UaW7LDk4CiGO0BxQ9SlzWDBn5DR5VwgEBh8rMUjQ7zmjjJq0Q3qsp9Rs_Fm9mkLs5TQglfh7psMNKg2e0WEwaMJBIYGeVuXZH6qFxXdiCMS2Ab8w2A2gJ0aGWQYeC3NBxl3E1wJIhUIDC5l6xtgeSIfrvlpnNDXDy3r7Owyzc2RB5Vqu2n5Ssn2nldnkMBTSno755IlUnkCFgQuEKideFmX4sDYzKr8XsbVIxvGLS2t8nfIKXarEI1kL4qnkzj6oIIwsY_Gcq4WgtAEAn3DtyE3TTzeEI8yI4lwGtjohtJq3I66ujrN-qYm09aG1-GIlFTBN6PnNAGqVBwSdH-JJWqaMHGu1EvCv8CBQKB_KK1raYutLtoUx9i6O9tNl2OoIh8YaBzGFSO9sYFrnrxV4wNDPuDjiGzXrTH0IDR4fCzfCF3hUbFxRcfPSyqDtDj4aZ-88kBgJJL2UFf88ipbTBKnnk6WNx0iKRQSSn4cuqKk5RVsuab5u03lcvSBIaKVaoBOm4GCk0463Dnlxf0QaomDn_bJKw8ERirYWRp-mZuWjzBtIAk11p4uK04diJPNp0jzaWBDstgydr88knKpoL3FP20QDYhISVYvBtswk8Zz8zSelAdJ5ZBWH_y0T155IDBSqVucmqznpMkqcbLLOl6kxRqDtDhxWzcObQNJbLCtqtKq_FT7swVpRYNBmpC4-UnxvHLFT_vklQcCI5kscYI0gao4P5iHGElsJxLYHxtkJkJlJDIojWuaRBSPjihruKLzVNy0n68klQcCgXTqtZWyKo9ql3bjpyv9E1YMVIIKvSehIhUbvROvyu9HkvpPO5SktJIWd0nLDwQCxVF7Yru6IkARUUrzNhieVy_Op5yjImZxOjrizBgvWYH_E0t1u_qPIvhtktJKLXHw03kUrR8IjDbSbCBa1vUqjNLWVCWslDv1JOambbz3IFFepcyNDxLu-P6RRV55Eklt6uknEBjriI02tbar01O1Ic53TuxLqW3ZqvyIjI0WUZIMGkqoaQl7gSDEUY-hMuC0cd18v06tZUpSnkteeSAwWii6MV69Ie7JCqlYh-RHpbS6mhhYb0kijSBFh_0RHYOMjp90-Pj5fp2kNkpaf1nklQcCo4mi93tpvfWcVIA0op6TQpn-jzAlQWAHkjbEo4zq0BI7VDEYfhz1GEojTRvbzy-ahrS-IassEBit1O49GfN_RprkQ_D4GFgAAAAASUVORK5CYII\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7208/Products",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Products"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7208/Products?page=1&pageSize=25",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Products"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "25"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7208/Products?page=1&pageSize=25",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Products"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "ById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7208/Products/by?id=4030df55-ab51-462e-b331-8c6705e90e47",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Products",
+                "by"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "4030df55-ab51-462e-b331-8c6705e90e47"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "ById",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7208/Products/by?id=4030df55-ab51-462e-b331-8c6705e90e47",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Products",
+                    "by"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "4030df55-ab51-462e-b331-8c6705e90e47"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ProductId\" : \"4030df55-ab51-462e-b331-8c6705e90e47\",\n  \"UserId\" : \"59dfb414-70a5-4f99-a7f5-fcb02b1040fc\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7208/Orders",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Orders"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Stripe",
+      "item": [
+        {
+          "name": "Session",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"OrderId\" : \"8c4c7515-bf41-4527-82b1-18620b8c0b1f\",\n\"UserId\" : \"59dfb414-70a5-4f99-a7f5-fcb02b1040fc\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7208/Stripe/session",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Stripe",
+                "session"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Session",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\"OrderId\" : \"8c4c7515-bf41-4527-82b1-18620b8c0b1f\",\n\"UserId\" : \"59dfb414-70a5-4f99-a7f5-fcb02b1040fc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7208/Stripe/session",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Stripe",
+                    "session"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Verify State",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7208/Stripe/Verify/State?OrderId=8c4c7515-bf41-4527-82b1-18620b8c0b1f",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7208",
+              "path": [
+                "Stripe",
+                "Verify",
+                "State"
+              ],
+              "query": [
+                {
+                  "key": "OrderId",
+                  "value": "8c4c7515-bf41-4527-82b1-18620b8c0b1f"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Verify State",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7208/Stripe/Verify/State?OrderId=8c4c7515-bf41-4527-82b1-18620b8c0b1f",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7208",
+                  "path": [
+                    "Stripe",
+                    "Verify",
+                    "State"
+                  ],
+                  "query": [
+                    {
+                      "key": "OrderId",
+                      "value": "8c4c7515-bf41-4527-82b1-18620b8c0b1f"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
