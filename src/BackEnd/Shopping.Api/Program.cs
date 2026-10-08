@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddConfigurations();
 builder.AddDependency();
 builder.AddData();
+builder.AddDocumentation();
 
 if (!builder.Environment.IsDevelopment())
 {
@@ -14,6 +15,9 @@ if (!builder.Environment.IsDevelopment())
 }
 
 var app = builder.Build();
+
+app.MapOpenApi("/openapi/{documentName}.json");
+app.UseSwaggerUI(x => x.SwaggerEndpoint(builder.Configuration["Url"]+"/openapi/v1.json" ?? throw new Exception("Url not found!"), ""));
 
 if (!app.Environment.IsDevelopment())
 {

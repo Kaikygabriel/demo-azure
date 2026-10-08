@@ -1,5 +1,6 @@
 using System.Threading.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 using Shopping.Application.Ioc;
 using Shopping.Infra.Data.Context;
 using Shopping.Infra.Ioc;
@@ -48,6 +49,32 @@ public static class BuilderExtensions
             options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
         });
 
+        
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddDocumentation(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddOpenApi("v1",x =>
+        {
+            x.AddDocumentTransformer((document, context, arg3) =>
+            {
+                document.Info = new OpenApiInfo()
+                {
+                    Title = "Demo Shopping",
+                    Summary = "Projeto demo"
+                };
+                document.Servers =
+                [
+                    new OpenApiServer()
+                    {
+                        Url = builder.Configuration["Url"] ?? throw new Exception("Url not found")
+                    }
+                ];
+                return Task.FromResult(true);
+            });
+            
+        });
         
         return builder;
     }
