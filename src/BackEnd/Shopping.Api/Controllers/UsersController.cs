@@ -34,4 +34,9 @@ public class UsersController : ControllerBase
         var result = await _sender.Send(request,cancellation);
         return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
+
+    [HttpGet("ClaimsPrincipal")]
+    public async Task<ActionResult> GetClaims()
+        =>  Ok(User);
+
 }
