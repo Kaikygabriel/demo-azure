@@ -1,7 +1,9 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shopping.Api.Extensions;
 using Shopping.Application.UsesCases.Users.Command.Request;
+using Shopping.Application.UsesCases.Users.Queries.Request;
 
 namespace Shopping.Api.Controllers;
 
@@ -35,8 +37,13 @@ public class UsersController : ControllerBase
         return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
     }
 
+    [Authorize]
     [HttpGet("ClaimsPrincipal")]
-    public async Task<ActionResult> GetClaims()
-        =>  Ok(User);
+    public async Task<ActionResult> GetClaims(CancellationToken cancellation)
+    {
+        var result =
+            await _sender.Send(new GetClaimsOfUserRequest(Guid.Parse(User.Identity?.Name ?? Guid.Empty.ToString())),cancellation);
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+    }
 
 }

@@ -4,4 +4,6 @@ public class Configuration
 {
     public static string HttpClient { get;  } = "httpClient";
     public static string httpClientAuth { get;  } = "httpClientAuth";
+
+    public static string BackEndUri { get; } = "https://localhost:7208";
 }

@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
@@ -27,11 +29,13 @@ public static class BuilderExtensions
     {
         builder.Services.AddControllers();
 
+        builder.Services.ConfigureHttpJsonOptions(options => { options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
+
         builder.WebHost.ConfigureKestrel(x =>
         {
             x.AddServerHeader = false;
         });
-
+        
 
         builder.Services.AddRateLimiter(options =>
         {
