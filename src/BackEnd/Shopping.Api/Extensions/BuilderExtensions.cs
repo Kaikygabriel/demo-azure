@@ -27,6 +27,15 @@ public static class BuilderExtensions
     }
     public static WebApplicationBuilder AddConfigurations(this WebApplicationBuilder builder)
     {
+        builder.Services.AddCors(x =>
+        {
+            x.AddDefaultPolicy(corsPolicyBuilder => corsPolicyBuilder.WithOrigins(builder.Configuration["FrontEndUri"] ?? string.Empty)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+            );
+        });
+        
         builder.Services.AddControllers();
 
         builder.Services.ConfigureHttpJsonOptions(options => { options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });

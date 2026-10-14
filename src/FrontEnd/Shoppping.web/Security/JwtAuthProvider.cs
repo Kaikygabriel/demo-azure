@@ -23,6 +23,11 @@ public class JwtAuthProvider : AuthenticationStateProvider
         _httpClient = httpClientFactory.CreateClient(Configuration.httpClientAuth);
     }
 
+    public async Task<bool> IsAuthenticated()
+    {
+        var result =await GetAuthenticationStateAsync();
+        return result.User.Identity is not null;
+    }
     private async Task<UserClaimsDto?> GetUser()
     {
         var authUser = _localStorage.Get();
@@ -47,7 +52,7 @@ public class JwtAuthProvider : AuthenticationStateProvider
         
         return await resultRequest.Content.ReadFromJsonAsync<UserClaimsDto?>();
     }
-    public async override Task<AuthenticationState> GetAuthenticationStateAsync()
+    public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {    var result = await GetUser();
 
         if (result is null)
@@ -56,10 +61,13 @@ public class JwtAuthProvider : AuthenticationStateProvider
 
         var claims = new List<Claim>
         {
-            new(ClaimTypes.Name, result.Email),
-            new(ClaimTypes.Role, result.Role?.FirstOrDefault() ?? "")
+            new(ClaimTypes.Name, result.Email)
+            
         };
 
+        foreach (var role in result.Role)
+            claims.Add(new (ClaimTypes.Role,role));
+        
         var identity = new ClaimsIdentity(claims, "CustomAuth");
         var user = new ClaimsPrincipal(identity);
 

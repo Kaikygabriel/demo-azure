@@ -20,6 +20,7 @@ public class LocalStorage
 
     public void Insert(AuthUserResponse request)
     {
+        Console.WriteLine("Inserindo");
         _localStorageService.SetItem(_token,request.Token);
         _localStorageService.SetItem(_refreshToken,request.RefreshToken);
         _localStorageService.SetItem(_expiredToken,request.ExpiredToken);

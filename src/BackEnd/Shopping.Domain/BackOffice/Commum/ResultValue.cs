@@ -18,9 +18,9 @@ public sealed class ResultValue<T>
         IsSuccess = true;
     }
     
-    public Error Error { get; private init; }
-    public bool IsSuccess { get; private init; }
-    public T Value { get; private init; }
+    public Error Error { get;  init; }
+    public bool IsSuccess { get; init; }
+    public T Value { get; init; }
 
     public static implicit operator ResultValue<T>(Error error)
         => new (error);
