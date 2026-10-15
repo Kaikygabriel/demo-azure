@@ -22,19 +22,19 @@ public class UsersController : ControllerBase
     public async Task<ActionResult> Register([FromBody] RegisterUserRequest request, CancellationToken cancellation = default)
     {
         var result = await _sender.Send(request,cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
     [HttpPost("Login")]
     public async Task<ActionResult> Login([FromBody] LoginUserRequest request, CancellationToken cancellation = default)
     {
         var result = await _sender.Send(request,cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
     [HttpPost("Refresh-Token")]
     public async Task<ActionResult> RefreshToken([FromBody] LoginByRefreshTokenRequest request, CancellationToken cancellation = default)
     {
         var result = await _sender.Send(request,cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 
     [Authorize]
@@ -43,7 +43,7 @@ public class UsersController : ControllerBase
     {
         var result =
             await _sender.Send(new GetClaimsOfUserRequest(Guid.Parse(User.Identity?.Name ?? Guid.Empty.ToString())),cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 
 }

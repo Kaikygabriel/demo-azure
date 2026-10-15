@@ -19,7 +19,7 @@ internal sealed class AuthService : IAuthService
 
     public async Task<ResultValue<AuthUserResponse>> LoginByRefreshTokenAsync(LoginByRefreshTokenRequest request, CancellationToken cancellation)
     {
-        var result = await _httpClient.PostAsJsonAsync("/Users/Register",request,cancellation);
+        var result = await _httpClient.PostAsJsonAsync("/Users/Refresh-Token",request,cancellation);
         return result.StatusCode is HttpStatusCode.InternalServerError ? new Error("Internal server error") : await result.Content.ReadFromJsonAsync<ResultValue<AuthUserResponse>>(cancellation);
     }
 
@@ -31,7 +31,7 @@ internal sealed class AuthService : IAuthService
 
     public async Task<ResultValue<AuthUserResponse>> RegisterAsync(RegisterUserRequest request, CancellationToken cancellationToken)
     {
-        var result = await _httpClient.PostAsJsonAsync("/Users/Login",request,cancellationToken);
+        var result = await _httpClient.PostAsJsonAsync("/Users/Register",request,cancellationToken);
         return result.StatusCode is HttpStatusCode.InternalServerError ? new Error("Internal server error") : await result.Content.ReadFromJsonAsync<ResultValue<AuthUserResponse>>(cancellationToken);
     }
 }

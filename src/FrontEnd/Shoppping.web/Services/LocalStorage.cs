@@ -30,8 +30,8 @@ public class LocalStorage
 
     public AuthUserResponse? Get()
     {
-        var token = _localStorageService.GetItem<string>(_token);
-        var refreshToken = _localStorageService.GetItem<string>(_refreshToken);
+        var token = _localStorageService.GetItem<string?>(_token);
+        var refreshToken = _localStorageService.GetItem<string?>(_refreshToken);
         var expiredToken = _localStorageService.GetItem<DateTime?>(_expiredToken);
         var expiredRefreshToken = _localStorageService.GetItem<DateTime?>(_expiredRefreshToken);
         var id = _localStorageService.GetItem<Guid?>(_id);

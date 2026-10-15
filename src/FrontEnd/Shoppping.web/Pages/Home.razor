@@ -1,7 +1,16 @@
 ﻿@page "/"
+@using Shoppping.web.Components
 
 <PageTitle>Home</PageTitle>
+<AuthorizeView>
+    <Authorized>
+        <h1>Hello, world!</h1>
+        Welcome to your new app.
+    </Authorized>
+    <NotAuthorized>
+        <LoginRedirect/>
+    </NotAuthorized>
 
-<h1>Hello, world!</h1>
+</AuthorizeView>
 
-Welcome to your new app.
+

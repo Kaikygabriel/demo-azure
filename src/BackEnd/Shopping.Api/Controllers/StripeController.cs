@@ -30,7 +30,7 @@ public class StripeController : ControllerBase
     public async Task<ActionResult> CreateSession(CreateSessionRequest request,CancellationToken cancellation)
     {
         var result = await _sender.Send(request,cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
     
     [HttpPost("/web-hook")]

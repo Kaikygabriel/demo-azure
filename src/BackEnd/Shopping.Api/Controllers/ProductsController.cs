@@ -24,7 +24,7 @@ public class ProductsController : ControllerBase
     public async Task<ActionResult> Create([FromBody] CreateProductRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request, cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
     
     //Products/Image
@@ -35,14 +35,14 @@ public class ProductsController : ControllerBase
     public async Task<ActionResult> AddImage([FromBody] AddImageInProductRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request, cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
     
     [HttpGet]
     public async Task<ActionResult> GetAll([FromQuery] GetAllProductsRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request, cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 
     [HttpGet("By")]
@@ -50,6 +50,6 @@ public class ProductsController : ControllerBase
     public async Task<ActionResult> GetById([FromQuery]GetProductByIdRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request, cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 }

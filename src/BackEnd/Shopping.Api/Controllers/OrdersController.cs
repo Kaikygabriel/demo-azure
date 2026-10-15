@@ -23,7 +23,7 @@ public class OrdersController : ControllerBase
     public async Task<ActionResult> Create([FromBody] CreateOrderRequest request,CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request,cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 
     [HttpGet]
@@ -32,6 +32,6 @@ public class OrdersController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(request,cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 }

@@ -26,17 +26,20 @@ public class JwtAuthProvider : AuthenticationStateProvider
     public async Task<bool> IsAuthenticated()
     {
         var result =await GetAuthenticationStateAsync();
-        return result.User.Identity is not null;
+        return result.User.Identity?.IsAuthenticated == true;
     }
     private async Task<UserClaimsDto?> GetUser()
     {
         var authUser = _localStorage.Get();
         if(authUser is null)
-            return null;
-
-        if (authUser.ExpiredToken >= DateTime.UtcNow )
         {
-            if (authUser.ExpiredRefreshToken >= DateTime.UtcNow)
+            Console.WriteLine("User null");
+            return null;
+        }
+
+        if (authUser.ExpiredToken <= DateTime.UtcNow )
+        {
+            if (authUser.ExpiredRefreshToken <= DateTime.UtcNow)
                 return null;
 
             var resultLoginByRefreshToken = await LoginByRefreshToken(authUser);
@@ -53,7 +56,8 @@ public class JwtAuthProvider : AuthenticationStateProvider
         return await resultRequest.Content.ReadFromJsonAsync<UserClaimsDto?>();
     }
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
-    {    var result = await GetUser();
+    {    
+        var result = await GetUser();
 
         if (result is null)
             return new AuthenticationState(
@@ -83,5 +87,11 @@ public class JwtAuthProvider : AuthenticationStateProvider
             return null;
         return result.Value;
     }
-    
+    public async Task UpdateAuthenticationStateAsync()
+    {
+        var authenticationState = await GetAuthenticationStateAsync();
+
+        NotifyAuthenticationStateChanged(
+            Task.FromResult(authenticationState));
+    }
 }

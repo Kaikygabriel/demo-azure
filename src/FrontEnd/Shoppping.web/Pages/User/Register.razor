@@ -1,0 +1,89 @@
+@page "/Register"
+@inherits RegisterPage
+<PageTitle>Register</PageTitle>
+
+<MudText Typo="Typo.h3" Align="Align.Center" Class="mt-12 mb-10">Register</MudText>
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="11" sm="9">
+        @if (Request is null && Error is null)
+        {
+            <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center">
+                <MudProgressCircular Indeterminate="true"/>
+            </MudStack>
+        }
+        else if(Error is not null)
+        {
+            <MudAlert  >@Error.Message</MudAlert>
+        }
+        else
+        {
+
+            <MudPaper Class="pa-3">
+                <EditForm Model="@Request" OnValidSubmit="OnValidSubmitAsync">
+                    <DataAnnotationsValidator/>
+                    
+                    <MudTextField
+                        @bind-Value="Request.Name"
+                        MaxLength="180"
+                        For="@(() => Request.Name)"
+                        InputType="InputType.Text"
+                        Required="true"
+                        RequiredError="Name is required!"
+                        HelperText="Insert a Name valid!"
+                        Label="Name"/>
+                    
+                    <MudTextField
+                        @bind-Value="Request.Email"
+                        MaxLength="300"
+                        For="@(() => Request.Email)"
+                        InputType="InputType.Email"
+                        AutoFocus="true"
+                        Required="true"
+                        RequiredError="Email is required!"
+                        HelperText="Insert a email valid!"
+                        Label="Email"/>
+                    
+                    <MudTextField
+                        @bind-Value="Request.Password"
+                        MaxLength="120"
+                        For="@(() => Request.Password)"
+                        InputType="InputType.Password"
+                        Required="true"
+                        RequiredError="Password is required!"
+                        HelperText="Insert a password valid!"
+                        Label="Password"/>
+                    
+                    <MudTextField
+                        @bind-Value="Request.Cep"
+                        MaxLength="8"
+                        For="@(() => Request.Cep)"
+                        InputType="InputType.Number"
+                        Required="true"
+                        RequiredError="Cep is required!"
+                        HelperText="Insert a Cep valid!"
+                        Label="Cep"/>
+                    <MudTextField
+                        @bind-Value="Request.Address"
+                        MaxLength="120"
+                        For="@(() => Request.Address)"
+                        InputType="InputType.Text"
+                        Required="true"
+                        RequiredError="Address is required!"
+                        HelperText="Insert a Address valid!"
+                        Label="Address"/>
+                    <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Class="mt-5">
+                        @if (!Loading)
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Style="width: 70%" Size="Size.Large" Class="w-100" ButtonType="ButtonType.Submit">Register</MudButton>
+                        }
+                        else
+                        {
+                            <MudSkeleton Height="42.45" Style="width: 70%"/>
+                        }
+                    </MudStack>
+
+                </EditForm>
+            </MudPaper>
+        }
+    </MudItem>
+</MudGrid>

@@ -24,13 +24,13 @@ public sealed class CategoriesController : ControllerBase
     public async Task<ActionResult> Create([FromBody] CreateCategoryRequest request, CancellationToken cancellation)
     {
         var result = await _sender.Send(request, cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 
     [HttpGet]
     public async Task<ActionResult> GetAll([FromQuery] GetAllCategoriesRequest request, CancellationToken cancellation)
     {
         var result = await _sender.Send(request, cancellation);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error.ToProblemDetails());
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
     }
 }

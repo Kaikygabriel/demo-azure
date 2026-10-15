@@ -11,8 +11,7 @@ public partial class LoginPage : ComponentBase
 {
     protected bool Loading;
     protected Error? Error;
-    protected LoginUserRequest Request { get; set; } = new();
-
+    protected LoginUserRequest? Request { get; set; }
     [Inject]
     public LocalStorage LocalStorage { get; set; }
     [Inject]
@@ -27,7 +26,16 @@ public partial class LoginPage : ComponentBase
         
     }
 
-    
+    protected override async Task OnInitializedAsync()
+    {
+        if (await JwtAuthProvider.IsAuthenticated())
+        {
+            Nav.NavigateTo("/");
+            return;
+        }
+
+        Request =  new();
+    }
 
     public async Task LoginAsync()
     {
@@ -36,17 +44,14 @@ public partial class LoginPage : ComponentBase
             Loading = true;
 
             var result = await AuthService.LoginAsync(Request, CancellationToken.None);
-            Console.WriteLine("Exceutou");
             if (!result.IsSuccess)
             {
-                Console.WriteLine("Passou pelo errado");
-                Console.WriteLine(result.Error.Message);
                 Error = result.Error;
                 return;
             }
 
-            Console.WriteLine("Executou esse");
             LocalStorage.Insert(result.Value);
+            await JwtAuthProvider.UpdateAuthenticationStateAsync();
             StateHasChanged();
             Nav.NavigateTo("/");
 
