@@ -39,17 +39,23 @@ public partial class RegisterPage : ComponentBase
     {
         try
         {
+            Console.WriteLine("Não deu erro 0");
+
             Loading = true;
             var result = await Service.RegisterAsync(Request, CancellationToken.None);
+            Console.WriteLine("Não deu erro");
             if (!result.IsSuccess)
             {
                 Error = result.Error;
                 StateHasChanged();
                 return;
             }
-
+            Console.WriteLine("Não deu erro 2");
             LocalStorage.Insert(result.Value);
+            Console.WriteLine("Não deu erro 3");
             await JwtAuthProvider.UpdateAuthenticationStateAsync();
+            Console.WriteLine("Não deu erro 4");
+            StateHasChanged();
             Nav.NavigateTo("/");
         }
         finally

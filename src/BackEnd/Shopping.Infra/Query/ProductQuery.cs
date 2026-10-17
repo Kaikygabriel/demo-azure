@@ -17,6 +17,8 @@ internal sealed class ProductQuery : IProductQuery
 
     public async Task<PagedResponse<List<ProductDto>>> GetAllAsync(int page, int pageSize, CancellationToken cancellation = default)
     {
+        page = page == 0 ? 1 : page;
+        
         var products = await _appDbContext.Products.Skip((1 - page) * pageSize).Take(pageSize).Select(x =>
                 new ProductDto(x.Id, x.Title, x.Summary, x.ImageThumbUrl, x.Price, x.Discount, x.Category.Title))
             .ToListAsync(cancellation);

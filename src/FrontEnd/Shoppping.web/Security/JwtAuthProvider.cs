@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Shopping.Application.Dto.Users;
 using Shopping.Application.UsesCases.Users.Command.Request;
 using Shopping.Application.UsesCases.Users.Command.Response;
+using Shopping.Domain.BackOffice.Commum;
 using Shoppping.web.Configurations;
 using Shoppping.web.Interfaces;
 using Shoppping.web.Services;
@@ -31,6 +32,7 @@ public class JwtAuthProvider : AuthenticationStateProvider
     private async Task<UserClaimsDto?> GetUser()
     {
         var authUser = _localStorage.Get();
+        
         if(authUser is null)
         {
             Console.WriteLine("User null");
@@ -47,36 +49,36 @@ public class JwtAuthProvider : AuthenticationStateProvider
                 return null;
 
             authUser = resultLoginByRefreshToken;
+            _localStorage.Insert(authUser);
         }
         
-        var resultRequest = await _httpClient.GetAsync("/Users/Claims");
+        var resultRequest = await _httpClient.GetAsync("/Users/ClaimsPrincipal");
         if (!resultRequest.IsSuccessStatusCode)
             return null;
+        var result = await resultRequest.Content.ReadFromJsonAsync<ResultValue<UserClaimsDto>>();
+        if (!result.IsSuccess)
+            return null;
         
-        return await resultRequest.Content.ReadFromJsonAsync<UserClaimsDto?>();
+        return result.Value;
     }
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {    
         var result = await GetUser();
-
         if (result is null)
             return new AuthenticationState(
                 new ClaimsPrincipal(new ClaimsIdentity()));
-
-        var claims = new List<Claim>
-        {
-            new(ClaimTypes.Name, result.Email)
-            
+        
+        var claims = new List<Claim>()
+        { 
+             new(ClaimTypes.Name, result.Email)
         };
-
+        
         foreach (var role in result.Role)
             claims.Add(new (ClaimTypes.Role,role));
         
         var identity = new ClaimsIdentity(claims, "CustomAuth");
         var user = new ClaimsPrincipal(identity);
-
         return new AuthenticationState(user);
-
     }
 
     private async Task<AuthUserResponse?> LoginByRefreshToken(AuthUserResponse expiredAuthModel)
@@ -89,9 +91,17 @@ public class JwtAuthProvider : AuthenticationStateProvider
     }
     public async Task UpdateAuthenticationStateAsync()
     {
-        var authenticationState = await GetAuthenticationStateAsync();
-
-        NotifyAuthenticationStateChanged(
-            Task.FromResult(authenticationState));
+        try
+        {
+            Console.WriteLine("Executou");
+            NotifyAuthenticationStateChanged(
+                Task.FromResult(await GetAuthenticationStateAsync()));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+         
     }
 }

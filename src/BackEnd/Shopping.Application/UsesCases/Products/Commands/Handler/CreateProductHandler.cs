@@ -22,6 +22,7 @@ internal sealed class CreateProductHandler : IRequestHandler<CreateProductReques
 
     public async Task<ResultValue<Guid>> Handle(CreateProductRequest request, CancellationToken cancellationToken)
     {
+        Console.WriteLine("\nAtivou\n");
         if (await _productRepository.ExistsByTitle(request.Title, cancellationToken))
             return new Error("Title in Product Already Exists");
 
@@ -35,12 +36,14 @@ internal sealed class CreateProductHandler : IRequestHandler<CreateProductReques
 
         var product = resultCreateProduct.Value;
 
+        Console.WriteLine("\nantes\n");
         if (request.Image is not null)
         {
+            Console.WriteLine("\nPassou\n");
             var resultAddImage = await _storageService.Insert(request.Image.Base64,request.Image.Extension); 
             if(!resultAddImage.IsSuccess)
                 return resultAddImage.Error;
-            
+            Console.WriteLine("Passou e continuou");
             product.SetImageThumb(resultAddImage.Value);
         }
         
