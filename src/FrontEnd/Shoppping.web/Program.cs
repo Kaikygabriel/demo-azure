@@ -17,6 +17,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddLocalStorageServices();
 
 builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<LocalStorage>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthProvider>();

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Shopping.Application.Commum;
+using Shopping.Application.Dto.Comments;
 using Shopping.Application.Dto.Products;
 using Shopping.Application.Interfaces.Queries;
 using Shopping.Infra.Data.Context;
@@ -18,13 +19,12 @@ internal sealed class ProductQuery : IProductQuery
     public async Task<PagedResponse<List<ProductDto>>> GetAllAsync(int page, int pageSize, CancellationToken cancellation = default)
     {
         page = page == 0 ? 1 : page;
-        
         var products = await _appDbContext.Products.Skip((1 - page) * pageSize).Take(pageSize).Select(x =>
-                new ProductDto(x.Id, x.Title, x.Summary, x.ImageThumbUrl, x.Price, x.Discount, x.Category.Title))
+                new ProductDto(x.Id, x.Title, x.Summary, x.ImageThumbUrl, x.Price, x.Discount, x.Category.Title,x.Stars))
             .ToListAsync(cancellation);
 
-        var total = await _appDbContext.Products.CountAsync(cancellation);
-        return new PagedResponse<List<ProductDto>>(page, pageSize, products, total);
+        var total = await _appDbContext.Products.CountAsync(cancellation) / pageSize ;
+        return new PagedResponse<List<ProductDto>>(page, pageSize, products,total == 0 ?1:total);
     }
 
     public async Task<ProductDetailsDto?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
@@ -32,7 +32,7 @@ internal sealed class ProductQuery : IProductQuery
         return await _appDbContext.Products
             .Where(x=>x.Id == id)
             .Select(x=> 
-                new ProductDetailsDto(x.Id,x.Category,x.Title,x.Summary,x.ImageThumbUrl,x.ImagesUrl,x.Price,x.Discount,x.Stock))
+                new ProductDetailsDto(x.Id,x.Category,x.Title,x.Summary,x.ImageThumbUrl,x.ImagesUrl,x.Price,x.Discount,x.Stock,x.Comments.Select(x=>new CommentDto(x.Id,x.User.Name,x.Message,x.Stars))))
             .FirstOrDefaultAsync(cancellationToken);
         
     }

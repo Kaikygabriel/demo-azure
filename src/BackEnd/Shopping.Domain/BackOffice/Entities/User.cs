@@ -27,6 +27,7 @@ public sealed class User : Entity
     
     public List<Role> Roles { get;private set; } = [];
     public List<Voucher> Vouchers { get;private set; } = [];
+    public List<Comment> Comments { get;private set; } = [];
 
     public void SetRefreshToken(RefreshToken token)
         => RefreshToken = token;

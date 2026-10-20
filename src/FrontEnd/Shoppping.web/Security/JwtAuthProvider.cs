@@ -93,7 +93,6 @@ public class JwtAuthProvider : AuthenticationStateProvider
     {
         try
         {
-            Console.WriteLine("Executou");
             NotifyAuthenticationStateChanged(
                 Task.FromResult(await GetAuthenticationStateAsync()));
         }

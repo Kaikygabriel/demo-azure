@@ -1,0 +1,38 @@
+@page "/List"
+@inherits ListProductPage
+
+@if (Products is null && Error is null)
+{
+    <MudProgressCircular Indeterminate="true"/>
+}
+else if (Error is not null)
+{
+    <MudAlert>@Error.Message</MudAlert>
+}
+else
+{
+    <MudText Typo="Typo.h4" Align="Align.Center" Class="ml-2 mt-4">Products</MudText>
+    <MudGrid Justify="Justify.Center" Class="mt-10" >
+        @foreach (var product in Products)
+        {
+            <MudCard Style="width: 22%" Class="mr-10">
+                <MudCardMedia Image="@product.ImageThumb" Height="200"/>
+                
+                <MudCardContent>
+                    <MudText Align="Align.Center" Typo="Typo.h5">@product.Title</MudText>
+                    <MudText Align="Align.Center" Typo="Typo.body2">@product.Summary</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Style="width: 100%" Variant="Variant.Filled" Color="Color.Primary">@product.Price.ToString("C")</MudButton>
+                </MudCardActions>
+                
+            </MudCard>
+        }
+    </MudGrid>
+    <MudStack Class="mt-8" Row="false" Justify="Justify.Center" AlignItems="AlignItems.Center">
+        
+        <MudPagination Color="Color.Primary" Count="@TotalPage" @bind-Selected="@PageCurrent"/>
+
+        <MudText Typo="Typo.subtitle2" Align="Align.Center">Selected page: @PageCurrent</MudText>
+    </MudStack>
+}

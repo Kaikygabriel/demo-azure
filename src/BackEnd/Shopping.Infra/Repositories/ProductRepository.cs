@@ -16,7 +16,7 @@ internal sealed class ProductRepository : IProductRepository
 
     public async Task<Product?> GetById(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return await _dbContext.Products.Include(x=>x.Comments).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public async Task<bool> ExistsByTitle(string title, CancellationToken cancellationToken = default)

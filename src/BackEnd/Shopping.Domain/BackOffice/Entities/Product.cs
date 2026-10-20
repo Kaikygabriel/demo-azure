@@ -17,8 +17,10 @@ public sealed class Product : Entity
         Stock = stock;
         Title = title;
         Summary = summary;
-        }
+        Stars = 0;
+    }
 
+    public Byte Stars { get; set; }
     public decimal Price { get; private set; }
     public string Title { get; private set; } = null!;
     public string? ImageThumbUrl { get;private  set; }
@@ -31,6 +33,26 @@ public sealed class Product : Entity
     public Category Category { get; private init; }
     public Guid CategoryId { get;private init; }
 
+    public List<Comment> Comments { get;private set; } = [];
+
+    public Result AddComment(Comment comment)
+    {
+        if (Comments.Exists(x => x.UserId == comment.UserId))
+            return new Error("The user has already commented on the product");
+        Comments.Add(comment);
+        UpdateStars();
+        return Result.Success();
+    }
+    
+    public Result RemoveComment(Comment comment)
+    {
+        if (!Comments.Exists(x => x.Id == comment.Id))
+            return new Error("Comment not found");
+        Comments.Remove(comment);
+        UpdateStars();
+        return Result.Success();
+    }
+    
     public decimal GetTotal()
         => Price - Discount;
     
@@ -74,6 +96,11 @@ public sealed class Product : Entity
     }
     public void SetImageThumb(string url)
         => ImageThumbUrl = url;
+
+    private void UpdateStars()
+    {
+        Stars = (byte)Comments.Average(x => x.Stars);
+    }
     
     public static class Factory
     {

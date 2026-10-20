@@ -43,6 +43,7 @@ public static class DependencyInjection
             builder.Services.AddTransient<IOrderRepository,OrderRepository>();
             builder.Services.AddTransient<IVoucherRepository,VoucherRepository>();
             builder.Services.AddTransient<IUserRepository,UserRepository>();
+            builder.Services.AddTransient<ICommentRepository,CommentRepository>();
         #endregion
 
         #region Services

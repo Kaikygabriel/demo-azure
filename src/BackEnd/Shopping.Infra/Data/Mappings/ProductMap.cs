@@ -47,6 +47,11 @@ internal sealed class ProductMap : IEntityTypeConfiguration<Product>
             .HasColumnName("price")
             .HasColumnType("money")
             .IsRequired();
+        
+        builder.Property(x => x.Stars)
+            .HasColumnName("stars")
+            .HasColumnType("smallint")
+            .IsRequired();
 
         builder.Property(x => x.Discount)
             .HasColumnName("discount")
