@@ -28,6 +28,11 @@ internal sealed class ShoppingCartMap : IEntityTypeConfiguration<ShoppingCart>
             .HasColumnType("uuid")
             .IsRequired();
 
+        builder.Property(x => x.UriPayment)
+            .HasColumnName("uri_payment")
+            .HasColumnType("varchar(1200)")
+            .IsRequired(false);
+
         builder.HasOne(x => x.User)
             .WithOne(x => x.ShoppingCart)
             .HasForeignKey<ShoppingCart>(x => x.UserId)
