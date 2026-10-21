@@ -12,7 +12,6 @@ internal sealed class PayService : IPayService
 
     public async Task<ResultValue<string>> CreateSession(ShoppingCart cart, CancellationToken cancellationToken = default)
     {
-        
         var options = new SessionCreateOptions
         {
             LineItems =

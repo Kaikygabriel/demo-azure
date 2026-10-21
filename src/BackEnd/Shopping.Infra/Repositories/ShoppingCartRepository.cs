@@ -19,6 +19,7 @@ internal sealed class ShoppingCartRepository : IShoppingCartRepository
         return await _dbContext.ShoppingCarts
             .Include(x => x.User)
             .Include(x => x.Orders)
+                .ThenInclude(x=>x.Product)
             .FirstOrDefaultAsync(x => x.UserId == id, cancellationToken);
     }
 
