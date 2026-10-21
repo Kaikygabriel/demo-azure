@@ -37,6 +37,9 @@ public sealed class Order : Entity
     public Voucher? Voucher { get; private init; }
     public Guid? VoucherId { get; private init; }
 
+    public ShoppingCart Cart { get; private init; }
+    public Guid CartId { get; private init; }
+    
     public decimal Total => Product.Price - (Voucher?.Value ?? 0);
 
     public void AlterState(EStatePayment statePayment)

@@ -15,5 +15,5 @@ internal sealed class OrderQuery : IOrderQuery
     }
 
     public async Task<OrderDto?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
-        => await _dbContext.Orders.Where(x=>x.Id == id).Select(x=>new OrderDto(x.Id,x.Product,x.Voucher,x.UserId,x.User.Email.Address)).FirstOrDefaultAsync(cancellationToken);
+        => await _dbContext.Orders.Where(x=>x.Id == id).Select(x=>new OrderDto(x.Id,x.Product,x.Voucher)).FirstOrDefaultAsync(cancellationToken);
 }

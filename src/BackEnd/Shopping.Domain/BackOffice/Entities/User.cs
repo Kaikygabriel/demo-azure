@@ -16,6 +16,7 @@ public sealed class User : Entity
         Email = email;
         Password = password;
         Localization = localization;
+        ShoppingCart = new ShoppingCart(this);
     }
 
     public string Name { get;private set; }
@@ -24,6 +25,7 @@ public sealed class User : Entity
     public Localization Localization { get;private set; }
 
     public RefreshToken? RefreshToken { get;private set; }
+    public ShoppingCart ShoppingCart { get;private init; }
     
     public List<Role> Roles { get;private set; } = [];
     public List<Voucher> Vouchers { get;private set; } = [];

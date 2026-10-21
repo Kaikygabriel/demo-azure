@@ -37,7 +37,12 @@ internal sealed class CreateOrderHandler : IRequestHandler<CreateOrderRequest,Re
             voucher = await _voucherRepository.GetByIdAsync(request.VoucherId ?? Guid.Empty, cancellationToken);
 
         var order = new Domain.BackOffice.Entities.Order(user, product, voucher);
+
+        var addOrder = user.ShoppingCart.AddOrder(order);
+        if (!addOrder.IsSuccess)
+            return addOrder.Error;
         
+        _userRepository.Update(user);
         _orderRepository.Create(order);
         await _unitOfWork.CommitAsync(cancellationToken);
         

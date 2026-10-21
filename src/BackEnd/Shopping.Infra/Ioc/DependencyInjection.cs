@@ -33,11 +33,13 @@ public static class DependencyInjection
 
             builder.Services.AddTransient<IOrderQuery,OrderQuery>();
             builder.Services.AddTransient<IProductQuery,ProductQuery>();
-
+            builder.Services.AddTransient<IShoppingCartQuery,ShoppingCartQuery>();
+            
         #endregion
         
         #region Repositories
             builder.Services.AddTransient<ICategoryRepository,CategoryRepository>();
+            builder.Services.AddTransient<IShoppingCartRepository,ShoppingCartRepository>();
             builder.Services.AddTransient<IProductRepository,ProductRepository>();
             builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
             builder.Services.AddTransient<IOrderRepository,OrderRepository>();

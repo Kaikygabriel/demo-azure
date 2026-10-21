@@ -64,5 +64,10 @@ internal sealed class OrderMap : IEntityTypeConfiguration<Order>
             .HasForeignKey(x => x.VoucherId)
             .HasConstraintName("fk_order_voucher_id")
             .IsRequired(false);
+
+        builder.Property(x => x.CartId)
+            .HasColumnName("shoppingCart_id")
+            .HasColumnType("uuid")
+            .IsRequired();
     }
 }

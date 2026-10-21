@@ -10,7 +10,7 @@ namespace Shopping.Infra.Services;
 internal sealed class PayService : IPayService
 {
 
-    public async Task<ResultValue<string>> CreateSession(Order order, CancellationToken cancellationToken = default)
+    public async Task<ResultValue<string>> CreateSession(ShoppingCart cart, CancellationToken cancellationToken = default)
     {
         
         var options = new SessionCreateOptions
@@ -25,15 +25,14 @@ internal sealed class PayService : IPayService
                         Currency = "BRL",
                         ProductData = new SessionLineItemPriceDataProductDataOptions()
                         {
-                          
-                            Name = order.Product.Title,
-                            Description = order.Product.Summary
+                            Name = "Shopping",
+                            Description = string.Join(" , ",cart.Orders.Select(x=>x.Product.Title))
                         },
-                        UnitAmount = (int)(order.Total * 100)
+                        UnitAmount = (int)(cart.Total * 100)
                     }
                 }
             ],
-            CustomerEmail = order.User.Email.Address,
+            CustomerEmail = cart.User.Email.Address,
             Currency = "BRL",
             CancelUrl = "https://localhost:7208/cancel",
             SuccessUrl = "https://localhost:7208/success",
@@ -41,7 +40,7 @@ internal sealed class PayService : IPayService
             {
                 Metadata =new Dictionary<string, string>()
                 {
-                    {"order",order.Id.ToString()}
+                    {"cart",cart.Id.ToString()}
                 }
             },
             PaymentMethodTypes = ["boleto","card"],
@@ -56,7 +55,7 @@ internal sealed class PayService : IPayService
     {
         var query = new ChargeSearchOptions()
         {
-            Query = $"metadata['order']:'{id}'"
+            Query = $"metadata['cart']:'{id}'"
         };
         var service = new ChargeService();
         var result = await service.SearchAsync(query, cancellationToken: cancellationToken);

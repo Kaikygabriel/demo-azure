@@ -7,35 +7,31 @@ namespace Shopping.Application.UsesCases.Order.Command.Handler;
 
 internal sealed class CreateSessionHandler: IRequestHandler<CreateSessionRequest,ResultValue<string>>
 {
-    private readonly IOrderRepository _orderRepository;
+
+    private readonly IShoppingCartRepository _shoppingCartRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPayService _payService;
 
-    public CreateSessionHandler(IOrderRepository orderRepository, IUnitOfWork unitOfWork, IPayService payService)
+    public CreateSessionHandler( IUnitOfWork unitOfWork, IPayService payService, IShoppingCartRepository shoppingCartRepository)
     {
-        _orderRepository = orderRepository;
+    
         _unitOfWork = unitOfWork;
         _payService = payService;
+        _shoppingCartRepository = shoppingCartRepository;
     }
 
     public async Task<ResultValue<string>> Handle(CreateSessionRequest request, CancellationToken cancellationToken)
     {
-        var order = await _orderRepository.GetById(request.OrderId, cancellationToken);
-        if(order is null)
-            return new Error("Order not Found!");
-
-
-        Console.WriteLine(order.Id);
-        Console.WriteLine(order.Product is null ? "Product is null" : "product not null");
-        Console.WriteLine(order.User is null ? "User is null" : "User not null");
-        Console.WriteLine(order.User.Email.Address );
+        var cart = await _shoppingCartRepository.GetByUserIdAsync(request.UserId, cancellationToken);
+        if(cart is null)
+            return new Error("Cart not Found!");
         
-        var result = await _payService.CreateSession(order, cancellationToken);
+        var result = await _payService.CreateSession(cart, cancellationToken);
         if (!result.IsSuccess)
             return result.Error;
         
-        order.AlterUri(result.Value);
-        _orderRepository.Update(order);
+        cart.AlterUri(result.Value);
+        _shoppingCartRepository.Update(cart);
 
         await _unitOfWork.CommitAsync(cancellationToken);
 

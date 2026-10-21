@@ -20,7 +20,7 @@ internal sealed class ProductQuery : IProductQuery
     {
         page = page == 0 ? 1 : page;
         var products = await _appDbContext.Products.Skip((1 - page) * pageSize).Take(pageSize).Select(x =>
-                new ProductDto(x.Id, x.Title, x.Summary, x.ImageThumbUrl, x.Price, x.Discount, x.Category.Title,x.Stars))
+                new ProductDto(x.Id, x.Title, x.Summary, x.ImageThumbUrl, x.Price, x.Discount, x.Category.Title,x.Stars,x.Comments.Count))
             .ToListAsync(cancellation);
 
         var total = await _appDbContext.Products.CountAsync(cancellation) / pageSize ;

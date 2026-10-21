@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shopping.Api.Extensions;
 using Shopping.Application.UsesCases.Users.Command.Request;
 using Shopping.Application.UsesCases.Users.Queries.Request;
 
