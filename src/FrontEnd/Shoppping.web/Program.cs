@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Shoppping.web;
 using MudBlazor.Services;
+using Shopping.Application.Interfaces.Repositories;
 using Shoppping.web.Configurations;
 using Shoppping.web.Interfaces;
 using Shoppping.web.Security;
@@ -18,6 +19,7 @@ builder.Services.AddLocalStorageServices();
 
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddScoped<IShoppingCartService,ShoppingCartService>();
 builder.Services.AddScoped<LocalStorage>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthProvider>();

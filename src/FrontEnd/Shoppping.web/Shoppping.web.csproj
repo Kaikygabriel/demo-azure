@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\BackEnd\Shopping.Application\Shopping.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include=".github\workflows\main.yml" />
+  </ItemGroup>
+
 </Project>

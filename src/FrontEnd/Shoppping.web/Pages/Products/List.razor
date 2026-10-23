@@ -11,28 +11,57 @@ else if (Error is not null)
 }
 else
 {
-    <MudText Typo="Typo.h4" Align="Align.Center" Class="ml-2 mt-4">Products</MudText>
-    <MudGrid Justify="Justify.Center" Class="mt-10" >
-        @foreach(var product in Products)
+<div class="product-list-layout">
+    <MudGrid Spacing="2" Class="mt-4 product-grid">
+        @foreach (var product in Products)
         {
-            <MudCard Style="width: 22%" Class="mr-10">
-                <MudCardMedia Image="@product.ImageThumb" Height="200"/>
-                
-                <MudCardContent>
-                    <MudText Align="Align.Center" Typo="Typo.h5">@product.Title</MudText>
-                    <MudText Align="Align.Center" Typo="Typo.body2">@product.Summary</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Style="width: 100%" Variant="Variant.Filled" Color="Color.Primary">@product.Price.ToString("C")</MudButton>
-                </MudCardActions>
-                
-            </MudCard>
+            <MudItem xs="12" sm="9" md="4" lg="3" xl="2"
+                     Class="product-item">
+
+                <MudCard Class="product-card" Elevation="1">
+                    <MudCardMedia Image="@product.ImageThumb"
+                                  Class="product-image" />
+
+                    <div class="product-details">
+                        <MudCardContent Class="product-content">
+                            <MudText Typo="Typo.subtitle1"
+                                     Class="product-title">
+                                @product.Title
+                            </MudText>
+
+                            <MudStack Row="true"
+                                      AlignItems="AlignItems.Center"
+                                      Spacing="1"
+                                      Class="product-rating">
+                                <MudRating Disabled="true"
+                                           SelectedValue="@product.Stars"
+                                           Color="Color.Primary"
+                                           Size="Size.Small" />
+
+                                <MudText Typo="Typo.caption">
+                                    (@product.CommentCount)
+                                </MudText>
+                            </MudStack>
+
+                            <MudText Typo="Typo.h6"
+                                     Class="product-price">
+                                @product.Price.ToString("C")
+                            </MudText>
+                        </MudCardContent>
+
+                        <MudCardActions Class="product-actions">
+                            <MudButton FullWidth="true"
+                                       Size="Size.Small"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.AddShoppingCart">
+                                Adicionar
+                            </MudButton>
+                        </MudCardActions>
+                    </div>
+                </MudCard>
+            </MudItem>
         }
     </MudGrid>
-    <MudStack Class="mt-8" Row="false" Justify="Justify.Center" AlignItems="AlignItems.Center">
-        
-        <MudPagination Color="Color.Primary" Count="@TotalPage" @bind-Selected="@PageCurrent"/>
-
-        <MudText Typo="Typo.subtitle2" Align="Align.Center">Selected page: @PageCurrent</MudText>
-    </MudStack>
+</div>
 }
