@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Shopping.Application.Dto.Comments;
 using Shopping.Application.Dto.Order;
+using Shopping.Application.Dto.Products;
 using Shopping.Application.Dto.ShoppingCart;
 using Shopping.Application.Interfaces.Queries;
 using Shopping.Infra.Data.Context;
@@ -24,7 +26,10 @@ internal sealed class ShoppingCartQuery : IShoppingCartQuery
                     x.UserId,
                     x.User.Email.Address,
                     x.User.Name,
-                    x.Orders.Select(x=>new OrderDto(x.Id,x.Product,x.Voucher))))
+                    x.Orders.Select(x=>new OrderShoppingCartDto(x.Id,
+                        new ProductShoppingCartDetailsDto
+                            (x.Product.Id,x.Product.Title,x.Product.Summary,x.Product.ImageThumbUrl,x.Product.Price ,x.Product.Discount,x.Product.Stock,x.Product.Stars,x.Product.Comments.Count),
+                        x.Voucher))))
             .FirstOrDefaultAsync(cancellationToken);
     }
 }

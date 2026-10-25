@@ -1,61 +1,173 @@
-.product-list-layout ::deep .product-item {
-    padding-top: 4px;
-    padding-bottom: 4px;
+
+.shopping-cart {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
-.product-list-layout ::deep .product-card {
+.cart-header,
+.cart-footer {
+    flex: 0 0 auto;
+}
+
+.cart-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+/* Somente a lista rola; o rodapé permanece visível */
+.cart-items {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2px 2px 8px;
+}
+
+/* Card compacto e horizontal */
+.cart-item {
+    display: flex !important;
     flex-direction: row !important;
-    align-items: stretch;
-    height: auto !important;
-    min-height: 130px;
+    align-items: center;
+    flex: 0 0 88px;
+    height: 88px;
+    min-height: 88px;
+    width: 70%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid var(--mud-palette-divider);
+    border-radius: 8px;
 }
 
-.product-list-layout ::deep .product-image {
-    width: 40% !important;
-    min-width: 0;
-    height: auto !important;
-    min-height: 130px;
-    flex: 0 0 40% !important;
-    align-self: stretch;
+/* Imagem pequena à esquerda */
+.cart-item-image {
+    display: block;
+    width: 64px !important;
+    min-width: 64px;
+    max-width: 64px;
+    height: 64px !important;
+    min-height: 40px;
+    max-height: 40px;
+    flex: 0 0 64px;
+    margin-left: 6px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.product-list-layout .product-details {
+.cart-item-details {
     flex: 1 1 0;
-    width: 62%;
     min-width: 0;
+    height: 100%;
 }
 
-.product-list-layout ::deep .product-content {
-    padding: 8px 6px 2px;
+.cart-item-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 4px 6px !important;
 }
 
-.product-list-layout ::deep .product-title {
+/* Título no máximo em duas linhas */
+.cart-item-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    overflow-wrap: anywhere;
     font-size: 0.85rem;
-    line-height: 1.2;
-    min-height: 0;
-    max-height: 3.6em;
-    -webkit-line-clamp: 3;
+    line-height: 1.15rem;
 }
 
-.product-list-layout ::deep .product-rating {
-    margin-top: 4px;
-    gap: 2px;
+/* Avaliação pequena */
+.cart-item-rating {
+    height: 18px;
+    margin-top: 1px;
+    overflow: hidden;
 }
 
-.product-list-layout ::deep .product-price {
+.cart-item-rating .mud-rating {
+    transform: scale(0.8);
+    transform-origin: left center;
+}
+
+/* Preço */
+.cart-item-price {
+    margin-top: 1px;
     font-size: 0.95rem !important;
-    line-height: 1.3;
-    margin-top: 4px;
+    line-height: 1.2rem;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
-.product-list-layout ::deep .product-actions {
-    padding: 4px 6px 6px;
+/* Rodapé fixo dentro do carrinho */
+.cart-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 2px;
 }
 
-.product-list-layout ::deep .product-actions .mud-button-root {
-    min-height: 30px;
-    font-size: 0.65rem;
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-empty {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+/* Ajustes para gavetas estreitas */
+@media (max-width: 400px) {
+    .shopping-cart {
+        padding: 8px;
+    }
+
+    .cart-item {
+        flex-basis: 82px;
+        height: 82px;
+        min-height: 82px;
+    }
+
+    .cart-item-image {
+        width: 56px !important;
+        min-width: 56px;
+        max-width: 56px;
+        height: 56px !important;
+        min-height: 56px;
+        max-height: 56px;
+        flex-basis: 56px;
+    }
+
+    .cart-item-title {
+        font-size: 0.8rem;
+        line-height: 1.05rem;
+    }
+
+    .cart-item-price {
+        font-size: 0.85rem !important;
+    }
 }

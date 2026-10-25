@@ -1,45 +1,89 @@
-<MudNavMenu>
-        @foreach (var order in _shoppingCartDto.Orders)
+
+@if (_shoppingCartDto is null)
+{
+    <MudProgressCircular Indeterminate="true" />
+}
+else
+{
+    <div class="shopping-cart">
+
+        <div class="cart-header">
+            <MudText Typo="Typo.h6">
+                Meu carrinho
+            </MudText>
+            <MudDivider />
+        </div>
+
+        @if (!_shoppingCartDto.Orders.Any())
         {
-            <MudItem xs="12" sm="9" md="4" lg="3" xl="2"
-                     Class="product-item">
-
-                <MudCard Class="product-card" Elevation="1">
-                    <MudCardMedia Image="@order.Product.ImageThumbUrl"
-                                  Class="product-image" />
-
-                    <div class="product-details">
-                        <MudCardContent Class="product-content">
-                            <MudText Typo="Typo.subtitle1"
-                                     Class="product-title">
-                                @order.Product.Title
-                            </MudText>
-                            <MudText Typo="Typo.subtitle1"
-                                     Class="product-title">
-                                @order.Product.Summary
-                            </MudText>
-
-                            <MudStack Row="true"
-                                      AlignItems="AlignItems.Center"
-                                      Spacing="1"
-                                      Class="product-rating">
-                                <MudRating Disabled="true"
-                                           SelectedValue="@order.Product.Stars"
-                                           Color="Color.Primary"
-                                           Size="Size.Small" />
-
-                                <MudText Typo="Typo.caption">
-                                    (@order.Product.Comments.Count)
-                                </MudText>
-                            </MudStack>
-
-                            <MudText Typo="Typo.h6"
-                                     Class="product-price">
-                                @order.Total().ToString("C")
-                            </MudText>
-                        </MudCardContent>
-                        </div>
-                </MudCard>
-            </MudItem>
+            <div class="cart-empty">
+                <MudIcon Icon="@Icons.Material.Filled.ShoppingCart"
+                         Size="Size.Large" />
+                <MudText Typo="Typo.body2">
+                    Seu carrinho está vazio.
+                </MudText>
+            </div>
         }
-</MudNavMenu>
+        else
+        {
+            <div class="cart-items">
+                @foreach (var order in _shoppingCartDto.Orders)
+                {
+                    <MudCard Class="cart-item" Elevation="0">
+
+                        <MudCardMedia Image="@order.Product.ImageThumb"
+                                      Class="cart-item-image" />
+
+                        <div class="cart-item-details">
+                            <MudCardContent Class="cart-item-content">
+
+                                <MudText Typo="Typo.subtitle2"
+                                         Class="cart-item-title">
+                                    @order.Product.Title
+                                </MudText>
+
+                                <MudStack Row="true"
+                                          AlignItems="AlignItems.Center"
+                                          Spacing="1"
+                                          Class="cart-item-rating">
+                                    <MudRating Disabled="true"
+                                               SelectedValue="@order.Product.Stars"
+                                               Color="Color.Warning"
+                                               Size="Size.Small" />
+                                </MudStack>
+
+                                <MudText Typo="Typo.subtitle1"
+                                         Class="cart-item-price">
+                                    @order.Total().ToString("C")
+                                </MudText>
+
+                            </MudCardContent>
+                        </div>
+
+                    </MudCard>
+                }
+            </div>
+
+            <div class="cart-footer">
+                <MudDivider />
+
+                <div class="cart-total">
+                    <MudText Typo="Typo.subtitle1">
+                        Total
+                    </MudText>
+
+                    <MudText Typo="Typo.h6">
+                        @(_shoppingCartDto.Orders.Sum(order => order.Total()).ToString("C"))
+                    </MudText>
+                </div>
+
+                <MudButton FullWidth="true"
+                           Size="Size.Large"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary">
+                    Finalizar compra
+                </MudButton>
+            </div>
+        }
+    </div>
+}
