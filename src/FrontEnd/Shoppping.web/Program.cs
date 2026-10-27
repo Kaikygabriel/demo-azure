@@ -17,6 +17,7 @@ builder.Services.AddMudServices();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddLocalStorageServices();
 
+builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<IShoppingCartService,ShoppingCartService>();
