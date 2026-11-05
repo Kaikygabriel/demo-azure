@@ -1,5 +1,4 @@
-using Shopping.Domain.BackOffice.Abstraction;
-using Shopping.Domain.BackOffice.Commum;
+using Shopping.Shared.Entity;using Shopping.Domain.BackOffice.Commum;
 
 namespace Shopping.Domain.BackOffice.Entities;
 

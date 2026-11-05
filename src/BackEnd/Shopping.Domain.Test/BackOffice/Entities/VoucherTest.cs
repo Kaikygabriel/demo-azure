@@ -10,8 +10,8 @@ public class VoucherTest
     private const decimal VALUE_VALID = 12;
     private const decimal VALUE_INVALID = -1;
     
-    private readonly DateTime ENDDATE = new DateTime(14, 02, 2026);
-    private readonly DateTime STARTDATE = new DateTime(14, 01, 2026);
+    private readonly DateTime ENDDATE = DateTime.UtcNow.AddMonths(2);
+    private readonly DateTime STARTDATE = DateTime.UtcNow.AddMonths(-2);
 
 
     [Fact]
@@ -31,32 +31,36 @@ public class VoucherTest
     public void Create_Voucher_Should_Return_False_When_Value_Is_Negative()
     {
         var result = Voucher.Factory.Create(CODE_VALID, STARTDATE, ENDDATE, VALUE_INVALID);
-        Assert.True(result.IsSuccess);
+        Assert.False(result.IsSuccess);
     }
     
     [Fact]
     public void Create_Voucher_Should_Return_False_When_EndDate_Is_Invalid()
     {
         var result = Voucher.Factory.Create(CODE_VALID, STARTDATE, STARTDATE.AddMonths(-12), VALUE_VALID);
-        Assert.True(result.IsSuccess);
+        Assert.False(result.IsSuccess);
     }
     
     [Fact]
     public void Create_Voucher_Should_Return_False_When_StartDate_Is_Invalid()
     {
         var result = Voucher.Factory.Create(CODE_VALID, ENDDATE.AddMonths(12), ENDDATE, VALUE_VALID);
-        Assert.True(result.IsSuccess);
+        Assert.False(result.IsSuccess);
     }
 
     [Fact]
     public void Active_Voucher_Should_Return_True_When_Voucher_Is_Active()
     {
-        
+        var voucher = Voucher.Factory.Create(CODE_VALID, STARTDATE, ENDDATE, VALUE_VALID).Value;
+        voucher.Active();
+        Assert.True(voucher.IsActive);
     }
     
     [Fact]
     public void Disable_Voucher_Should_Return_True_When_Voucher_Is_Disable()
     {
-        
+        var voucher = Voucher.Factory.Create(CODE_VALID, STARTDATE, ENDDATE, VALUE_VALID).Value;
+        voucher.Disable();
+        Assert.False(voucher.IsActive);
     }
 }

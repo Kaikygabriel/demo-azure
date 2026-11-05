@@ -10,4 +10,8 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shopping.Shared\Shopping.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

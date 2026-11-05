@@ -1,8 +1,10 @@
+using System.Text.RegularExpressions;
 using Shopping.Domain.BackOffice.Commum;
+using Shopping.Shared.ValueObjects;
 
 namespace Shopping.Domain.BackOffice.ValueObjects;
 
-public sealed record Email
+public record Email : ValueObject
 {
     private Email()
     {
@@ -28,9 +30,6 @@ public sealed record Email
 
     private static bool AddressIsInvalid(string address)
         => string.IsNullOrEmpty(address) ||
-           !address.Contains('@') ||
-           address.Split('@').Length != 2 ||
-           address.Split('@')[0].Length <= 3 ||
-           address.Split('@')[1].Length <= 3;
+           !Regex.Match(address,@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").Success;
 
 }

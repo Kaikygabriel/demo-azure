@@ -1,5 +1,5 @@
-using Shopping.Domain.BackOffice.Abstraction;
-using Shopping.Domain.BackOffice.Commum;
+using System.Collections.ObjectModel;
+using Shopping.Shared.Entity;using Shopping.Domain.BackOffice.Commum;
 
 namespace Shopping.Domain.BackOffice.Entities;
 
@@ -25,7 +25,13 @@ public sealed class Product : Entity
     public string Title { get; private set; } = null!;
     public string? ImageThumbUrl { get;private  set; }
     public string Summary { get;private  set; }= null!;
-    public List<string> ImagesUrl { get;private  set; } = [];
+
+    private IList<string> _imagesUrl = [];
+    
+    public IReadOnlyCollection<string> ImagesUrl
+    {
+        get { return (ReadOnlyCollection<string>)_imagesUrl;  }
+    } 
     public DateTime CreateAt  { get; private  init; } = DateTime.UtcNow;
     public int Stock { get;private  set; }
     public decimal Discount { get;private  set; }
@@ -33,22 +39,26 @@ public sealed class Product : Entity
     public Category Category { get; private init; }
     public Guid CategoryId { get;private init; }
 
-    public List<Comment> Comments { get;private set; } = [];
+    private IList<Comment> _comments = [];
+    public ReadOnlyCollection<Comment> Comments
+    {
+        get { return (ReadOnlyCollection<Comment>)_comments; }
+    } 
 
     public Result AddComment(Comment comment)
     {
-        if (Comments.Exists(x => x.UserId == comment.UserId))
+        if (_comments.Any(x => x.UserId == comment.UserId))
             return new Error("The user has already commented on the product");
-        Comments.Add(comment);
+        _comments.Add(comment);
         UpdateStars();
         return Result.Success();
     }
     
     public Result RemoveComment(Comment comment)
     {
-        if (!Comments.Exists(x => x.Id == comment.Id))
+        if (!Comments.Any(x => x.Id == comment.Id))
             return new Error("Comment not found");
-        Comments.Remove(comment);
+        _comments.Remove(comment);
         UpdateStars();
         return Result.Success();
     }
@@ -70,7 +80,7 @@ public sealed class Product : Entity
         if (ImagesUrl.Contains(newImage))
             return new Error("Image url already exists in images");
         
-        ImagesUrl.Add(newImage);
+        _imagesUrl.Add(newImage);
         
         return Result.Success();
     }

@@ -1,6 +1,8 @@
+using Shopping.Shared.ValueObjects;
+
 namespace Shopping.Domain.BackOffice.ValueObjects;
 
-public record Localization
+public record Localization : ValueObject
 {
     public Localization()
     {

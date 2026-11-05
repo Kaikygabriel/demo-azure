@@ -1,4 +1,4 @@
-using Shopping.Domain.BackOffice.Abstraction;
+using Shopping.Shared.Entity;
 using Shopping.Domain.BackOffice.Commum;
 using Shopping.Domain.BackOffice.ValueObjects;
 

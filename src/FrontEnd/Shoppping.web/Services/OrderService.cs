@@ -4,10 +4,12 @@ using Shopping.Application.UsesCases.Order.Command.Request;
 using Shopping.Domain.BackOffice.Commum;
 using Shopping.Domain.BackOffice.Entities;
 using Shoppping.web.Configurations;
+using Shoppping.web.Interfaces;
+
 
 namespace Shoppping.web.Services;
 
-internal sealed class OrderService
+internal sealed class OrderService : IOrderService
 {
     private readonly HttpClient _httpClient;
 

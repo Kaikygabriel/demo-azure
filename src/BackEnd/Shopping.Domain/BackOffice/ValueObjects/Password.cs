@@ -1,8 +1,9 @@
 using Shopping.Domain.BackOffice.Commum;
+using Shopping.Shared.ValueObjects;
 
 namespace Shopping.Domain.BackOffice.ValueObjects;
 
-public sealed record Password
+public sealed record Password : ValueObject
 {
     private Password()
     {
