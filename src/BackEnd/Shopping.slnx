@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+  </Folder>
   <Project Path="Shopping.Api/Shopping.Api.csproj" />
   <Project Path="Shopping.Application/Shopping.Application.csproj" />
   <Project Path="Shopping.Domain.Test/Shopping.Domain.Test.csproj" />

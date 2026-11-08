@@ -1,0 +1,27 @@
+﻿services:
+  shopping.api:
+    image: shopping.api
+    build:
+      context: .
+      dockerfile: Shopping.Api/Dockerfile
+    depends_on:
+      - postgres
+      -
+    networks:
+      - rede
+    ports:
+      - 5000
+    environment:
+      - ASPNETCORE_URLS=https://+:7000;http://+:5000
+    
+  postgres:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    networks:
+      - rede
+    
+networks:
+  rede:
